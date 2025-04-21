@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:25:57 by taung             #+#    #+#             */
-/*   Updated: 2025/04/14 14:07:49 by taung            ###   ########.fr       */
+/*   Updated: 2025/04/15 12:40:44 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void	Fixed::setRawBits( int const raw ) {
 	this->_rawBits = raw;
 }
 
-float	Fixed::toFloat(void) const{
+float	Fixed::toFloat(void) const {
 	// std::cout << "toFloat called" << this->getRawBits() << std::endl;
 	return (((float)this->_rawBits / (1 << this->_fractional)));
 
