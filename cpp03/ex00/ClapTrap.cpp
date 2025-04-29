@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:22:43 by taung             #+#    #+#             */
-/*   Updated: 2025/04/23 11:44:25 by taung            ###   ########.fr       */
+/*   Updated: 2025/04/28 15:12:12 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ void		ClapTrap::takeDamage(unsigned int amount) {
 	std::cout << "ClapTrap " << this->_name
 		<< " takes" << amount << " points of damage!"
 		<<std::endl;
-		this->_HP -= amount;
+		if (this->_HP < amount)
+			this->_HP = 0;
+		else
+			this->_HP -= amount;
 }
 
 void		ClapTrap::beRepaired(unsigned int amount) {
@@ -113,7 +116,11 @@ void		ClapTrap::printStatus(void) const {
 	<< "DMG      : " << this->_DMG << std::endl;
 }
 
-void		ClapTrap::setHP(int amount) {
+void		ClapTrap::setName(std::string name) {
+	this->_name = name;
+}
+
+void		ClapTrap::setHP(unsigned int amount) {
 	this->_HP = amount;
 }
 

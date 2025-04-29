@@ -6,14 +6,14 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:22:43 by taung             #+#    #+#             */
-/*   Updated: 2025/04/23 11:44:25 by taung            ###   ########.fr       */
+/*   Updated: 2025/04/28 15:50:29 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(void) {
-	std::cout << "default constructor called" << std::endl;
+	std::cout << "ClapTrap default constructor called" << std::endl;
 	this->_name = "unkown clap trap";
 	this->_HP = 10;
 	this->_EP = 10;
@@ -21,7 +21,7 @@ ClapTrap::ClapTrap(void) {
 }
 
 ClapTrap::ClapTrap(std::string name) {
-	std::cout << "name constructor called" << std::endl;
+	std::cout << "ClapTrap name constructor called" << std::endl;
 	this->_name = name;
 	this->_HP = 10;
 	this->_EP = 10;
@@ -29,7 +29,7 @@ ClapTrap::ClapTrap(std::string name) {
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) {
-	std::cout << "copy constructor called" << std::endl;
+	std::cout << "ClapTrap copy constructor called" << std::endl;
 	if (this != &other) {
 		*this = other;
 	}
@@ -74,7 +74,7 @@ void		ClapTrap::attack(const std::string& target) {
 
 void		ClapTrap::takeDamage(unsigned int amount) {
 	std::cout << "ClapTrap " << this->_name
-		<< " takes" << amount << " points of damage!"
+		<< " takes " << amount << " points of damage!"
 		<<std::endl;
 		this->_HP -= amount;
 }
@@ -113,7 +113,7 @@ void		ClapTrap::printStatus(void) const {
 	<< "DMG      : " << this->_DMG << std::endl;
 }
 
-void		ClapTrap::setHP(int amount) {
+void		ClapTrap::setHP(unsigned int amount) {
 	this->_HP = amount;
 }
 
@@ -123,4 +123,8 @@ void		ClapTrap::setEP(int amount) {
 
 void		ClapTrap::setDMG(int amount) {
 	this->_DMG = amount;
+}
+
+void		ClapTrap::setName(std::string name) {
+	this->_name = name;
 }

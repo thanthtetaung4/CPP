@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:22:45 by taung             #+#    #+#             */
-/*   Updated: 2025/04/23 11:45:35 by taung            ###   ########.fr       */
+/*   Updated: 2025/04/28 15:00:24 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(void) {
 	c1.printStatus();
 	c1.attack("enemy tower");
 	c1.printStatus();
-	c1.takeDamage(1);
+	c1.takeDamage(1000);
 	c1.printStatus();
 	c1.beRepaired(100);
 	c1.printStatus();
