@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:10:24 by taung             #+#    #+#             */
-/*   Updated: 2025/05/06 14:47:56 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/06 15:46:49 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ DiamondTrap::DiamondTrap(void) {
 
 DiamondTrap::DiamondTrap(std::string name) {
 std::cout << "DiamondTrap name constructor called" << std::endl;
-	this->setName(name+"_clap_name");
+	this->setName(name + "_clap_name");
 	this->_name = name;
 	this->setHP(FragTrap::getHP());
 	this->setEP(ScavTrap::getEP());
@@ -38,7 +38,7 @@ if (this != &other) {
 }
 
 DiamondTrap::~DiamondTrap(void) {
-std::cout << "DiamondTrap " << this->getName() << " is destroyed" << std::endl;
+std::cout << "DiamondTrap " << this->_name << " is destroyed" << std::endl;
 }
 
 void		DiamondTrap::attack(const std::string& target) {
@@ -47,7 +47,7 @@ void		DiamondTrap::attack(const std::string& target) {
 }
 
 void		DiamondTrap::takeDamage(unsigned int amount) {
-std::cout << "DiamondTrap " << this->getName()
+std::cout << "DiamondTrap " << this->_name
 	<< " takes " << amount << " points of damage!"
 	<<std::endl;
 	if (this->getHP() < amount)
@@ -58,7 +58,7 @@ std::cout << "DiamondTrap " << this->getName()
 
 void		DiamondTrap::beRepaired(unsigned int amount) {
 if (this->getHP() > 0 && this->getEP() > 0) {
-	std::cout << "DiamondTrap " << this->getName()
+	std::cout << "DiamondTrap " << this->_name
 	<< " repairs, gaining "
 	<< amount << " points of hit points!"
 	<<std::endl;
@@ -68,7 +68,7 @@ if (this->getHP() > 0 && this->getEP() > 0) {
 }
 
 void	DiamondTrap::printStatus(void) const {
-std::cout << "DiamondTrap : " << this->getName() << std::endl
+std::cout << "DiamondTrap : " << this->_name << std::endl
 << "HP       : " << this->getHP() << std::endl
 << "EP       : " << this->getEP() << std::endl
 << "DMG      : " << this->getDMG() << std::endl;
