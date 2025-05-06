@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:22:41 by taung             #+#    #+#             */
-/*   Updated: 2025/04/28 15:26:59 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/06 14:08:10 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ to another instance of ClapTrap.
 class ClapTrap {
 	private:
 		std::string	_name;
-		int			_HP;
-		int			_EP;
+		unsigned int			_HP;
+		unsigned int			_EP;
 		int			_DMG;
 
 	public:
@@ -40,8 +40,8 @@ class ClapTrap {
 		void		takeDamage(unsigned int amount);
 		void		beRepaired(unsigned int amount);
 		std::string	getName(void) const;
-		int			getHP(void) const;
-		int			getEP(void) const;
+		unsigned int			getHP(void) const;
+		unsigned int			getEP(void) const;
 		int			getDMG(void) const;
 		void		printStatus(void) const;
 		void		setName(std::string name);

@@ -3,10 +3,10 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Target executable
-TARGET = fixed
+TARGET = fragtrap
 
 # Source files
-SRCS = ./main.cpp ./Fixed.cpp
+SRCS = ./main.cpp ./ClapTrap.cpp ./ScavTrap.cpp ./FragTrap.cpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
