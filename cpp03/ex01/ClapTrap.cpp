@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:22:43 by taung             #+#    #+#             */
-/*   Updated: 2025/05/06 14:00:51 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/06 15:54:29 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ std::string	ClapTrap::getName(void) const {
 	return (this->_name);
 }
 
-int			ClapTrap::getHP(void) const {
+unsigned int			ClapTrap::getHP(void) const {
 	return (this->_HP);
 }
 
-int			ClapTrap::getEP(void) const {
+unsigned int			ClapTrap::getEP(void) const {
 	return (this->_EP);
 }
 
