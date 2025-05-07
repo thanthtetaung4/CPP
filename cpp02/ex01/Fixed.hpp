@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:25:55 by taung             #+#    #+#             */
-/*   Updated: 2025/04/09 18:59:11 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/07 19:46:02 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class	Fixed {
 		int				toInt( void ) const;
 		Fixed&			operator=(const Fixed& other);
 		friend std::ostream&	operator<<(std::ostream& os, const Fixed &fixed);
+		//cannot use friend define it outside the class
 		~Fixed();
 		int getRawBits( void ) const;
 		void setRawBits( int const raw );
