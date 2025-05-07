@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:04:20 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 14:40:40 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/06 14:14:42 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "ClapTrap.hpp"
 
-class ScavTrap : virtual public ClapTrap {
+class ScavTrap : public virtual ClapTrap {
 	public:
 		ScavTrap(void);
 		ScavTrap(std::string name);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:22:45 by taung             #+#    #+#             */
-/*   Updated: 2025/05/06 15:45:31 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/07 14:56:32 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@
 int main(void) {
 	DiamondTrap d1("dia");
 
-	std::cout << d1.getName() << std::endl;
 	d1.printStatus();
 	d1.attack("enemy tower");
-	d1.setDMG(100);
 	d1.printStatus();
 	d1.attack("enemy tower");
 	d1.printStatus();

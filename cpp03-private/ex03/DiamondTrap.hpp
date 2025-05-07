@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 12:04:20 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 14:40:40 by taung            ###   ########.fr       */
+/*   Created: 2025/05/06 14:10:19 by taung             #+#    #+#             */
+/*   Updated: 2025/05/06 14:36:29 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __SCAV_TRAP_HPP__
-#define __SCAV_TRAP_HPP__
+#ifndef __DiamondTrap_HPP__
+#define __DiamondTrap_HPP__
 
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-class ScavTrap : virtual public ClapTrap {
+class DiamondTrap : public ScavTrap, public FragTrap {
+	private:
+		std::string	_name;
 	public:
-		ScavTrap(void);
-		ScavTrap(std::string name);
-		ScavTrap(const ScavTrap& other);
-		~ScavTrap();
+		DiamondTrap(void);
+		DiamondTrap(std::string name);
+		DiamondTrap(const DiamondTrap& other);
+		~DiamondTrap();
 		void		attack(const std::string& target);
 		void		takeDamage(unsigned int amount);
 		void		beRepaired(unsigned int amount);
 		void		printStatus(void) const;
-		void		guardGate(void);
+		void		whoAmI(void);
 };
 
 #endif

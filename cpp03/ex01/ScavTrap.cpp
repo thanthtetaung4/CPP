@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:04:23 by taung             #+#    #+#             */
-/*   Updated: 2025/05/06 14:04:04 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/07 14:27:15 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 ScavTrap::ScavTrap(void) {
 		std::cout << "ScavTrap default constructor called" << std::endl;
-		this->setName("a new ScavTrap");
-		this->setHP(100);
-		this->setEP(50);
-		this->setDMG(20);
+		this->_name = "a new ScavTrap";
+		this->_HP = 100;
+		this->_EP = 50;
+		this->_DMG = 20;
 }
 
 ScavTrap::ScavTrap(std::string name) {
 	std::cout << "ScavTrap name constructor called" << std::endl;
-	this->setName(name);
-		this->setHP(100);
-		this->setEP(50);
-		this->setDMG(20);
+	this->_name = name;
+		this->_HP = 100;
+		this->_EP = 50;
+		this->_DMG = 20;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& other) {
@@ -36,47 +36,47 @@ ScavTrap::ScavTrap(const ScavTrap& other) {
 }
 
 ScavTrap::~ScavTrap(void) {
-	std::cout << "ScavTrap " << this->getName() << " is destroyed" << std::endl;
+	std::cout << "ScavTrap " << this->_name << " is destroyed" << std::endl;
 }
 
 void	ScavTrap::guardGate(void) {
-	std::cout << "ScavTrap " << this->getName() << " is in guard mode" << std::endl;
+	std::cout << "ScavTrap " << this->_name << " is in guard mode" << std::endl;
 }
 
 void		ScavTrap::attack(const std::string& target) {
-	if (this->getHP() > 0 && this->getEP() > 0) {
-		std::cout << "ScavTrap " << this->getName()
+	if (this->_HP > 0 && this->_EP > 0) {
+		std::cout << "ScavTrap " << this->_name
 		<< " attacks " << target << ", causing "
-		<< this->getDMG() << " points of damage!"
+		<< this->_DMG << " points of damage!"
 		<<std::endl;
-		this->setEP(this->getEP() - 1);
+		this->_EP = this->_EP - 1;
 	}
 }
 
 void		ScavTrap::takeDamage(unsigned int amount) {
-	std::cout << "ScavTrap " << this->getName()
+	std::cout << "ScavTrap " << this->_name
 		<< " takes" << amount << " points of damage!"
 		<<std::endl;
-		if (this->getHP() < amount)
-			this->setHP(0);
+		if (this->_HP < amount)
+			this->_HP = 0;
 		else
-			this->setHP(this->getHP() - amount);
+			this->_HP = this->_HP - amount;
 }
 
 void		ScavTrap::beRepaired(unsigned int amount) {
-	if (this->getHP() > 0 && this->getEP() > 0) {
-		std::cout << "ScavTrap " << this->getName()
+	if (this->_HP > 0 && this->_EP > 0) {
+		std::cout << "ScavTrap " << this->_name
 		<< " repairs, gaining "
 		<< amount << " points of hit points!"
 		<<std::endl;
-		this->setHP(this->getHP() + amount);
-		this->setEP(this->getEP() - 1);
+		this->_HP = this->_HP + amount;
+		this->_EP = this->_EP - 1;
 	}
 }
 
 void	ScavTrap::printStatus(void) const {
-	std::cout << "ScavTrap : " << this->getName() << std::endl
-	<< "HP       : " << this->getHP() << std::endl
-	<< "EP       : " << this->getEP() << std::endl
-	<< "DMG      : " << this->getDMG() << std::endl;
+	std::cout << "ScavTrap : " << this->_name << std::endl
+	<< "HP       : " << this->_HP << std::endl
+	<< "EP       : " << this->_EP << std::endl
+	<< "DMG      : " << this->_DMG << std::endl;
 }

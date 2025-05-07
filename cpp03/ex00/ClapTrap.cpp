@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:22:43 by taung             #+#    #+#             */
-/*   Updated: 2025/04/28 15:12:12 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/07 14:23:22 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,16 @@ ClapTrap::ClapTrap(const ClapTrap& other) {
 	}
 }
 
+/*
+Here we can use other.private-attribute because
+C++ access control is class-based, not object-based.
+*/
 ClapTrap&	ClapTrap::operator=(const ClapTrap &other) {
 	if (this != &other) {
-		this->_name = other.getName();
-		this->_HP = other.getHP();
-		this->_EP = other.getEP();
-		this->_DMG = other.getDMG();
+		this->_name = other._name;
+		this->_HP = other._HP;
+		this->_EP = other._EP;
+		this->_DMG = other._DMG;
 	}
 	return (*this);
 }
@@ -97,11 +101,11 @@ std::string	ClapTrap::getName(void) const {
 	return (this->_name);
 }
 
-int			ClapTrap::getHP(void) const {
+unsigned int			ClapTrap::getHP(void) const {
 	return (this->_HP);
 }
 
-int			ClapTrap::getEP(void) const {
+unsigned int			ClapTrap::getEP(void) const {
 	return (this->_EP);
 }
 

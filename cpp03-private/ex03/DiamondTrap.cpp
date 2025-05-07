@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:10:24 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 14:56:34 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/06 15:46:49 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 DiamondTrap::DiamondTrap(void) {
 	std::cout << "DiamondTrap default constructor called" << std::endl;
-	this->FragTrap::_name = "a new DiamondTrap_clap_name";
-	// Have to use like this because of name hiding in C++
-	// if the parent and derive share the same member attribute name.
+	this->setName("DiamondTrap_clap_name");
 	this->_name = "a new DiamondTrap";
-	this->_HP = FragTrap::_HP;
-	this->_EP = ScavTrap::_EP;
-	this->_DMG = FragTrap::_DMG;
+	this->setHP(FragTrap::getHP());
+	this->setEP(ScavTrap::getEP());
+	this->setDMG(FragTrap::getDMG());
 }
 
 DiamondTrap::DiamondTrap(std::string name) {
 std::cout << "DiamondTrap name constructor called" << std::endl;
-	this->FragTrap::_name = name + "_clap_name";
+	this->setName(name + "_clap_name");
 	this->_name = name;
-	this->_HP = FragTrap::_HP;
-	this->_EP = ScavTrap::_EP;
-	this->_DMG = FragTrap::_DMG;
+	this->setHP(FragTrap::getHP());
+	this->setEP(ScavTrap::getEP());
+	this->setDMG(FragTrap::getDMG());
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& other) {
@@ -52,33 +50,33 @@ void		DiamondTrap::takeDamage(unsigned int amount) {
 std::cout << "DiamondTrap " << this->_name
 	<< " takes " << amount << " points of damage!"
 	<<std::endl;
-	if (this->_HP < amount)
-			this->_HP = 0;
+	if (this->getHP() < amount)
+			this->setHP(0);
 	else
-		this->_HP = this->_HP - amount;
+		this->setHP(this->getHP() - amount);
 }
 
 void		DiamondTrap::beRepaired(unsigned int amount) {
-if (this->_HP > 0 && this->_EP > 0) {
+if (this->getHP() > 0 && this->getEP() > 0) {
 	std::cout << "DiamondTrap " << this->_name
 	<< " repairs, gaining "
 	<< amount << " points of hit points!"
 	<<std::endl;
-	this->_HP = this->_HP + amount;
-	this->_EP = this->_EP - 1;
+	this->setHP(this->getHP() + amount);
+	this->setEP(this->getEP() - 1);
 }
 }
 
 void	DiamondTrap::printStatus(void) const {
 std::cout << "DiamondTrap : " << this->_name << std::endl
-<< "HP       : " << this->_HP << std::endl
-<< "EP       : " << this->_EP << std::endl
-<< "DMG      : " << this->_DMG << std::endl;
+<< "HP       : " << this->getHP() << std::endl
+<< "EP       : " << this->getEP() << std::endl
+<< "DMG      : " << this->getDMG() << std::endl;
 }
 /*
 This member function will display both its name and its ClapTrap name.
 */
 void	DiamondTrap::whoAmI(void) {
-	std::cout << "DiamondTrap Name: " << this->_name << std::endl;
-	std::cout << "Its ClapTrap Name: " << this->FragTrap::_name << std::endl;
+	std::cout << "DiamondTrap Name: " << this->getName() << std::endl;
+	std::cout << "Its ClapTrap Name: " << this->_name << std::endl;
 }

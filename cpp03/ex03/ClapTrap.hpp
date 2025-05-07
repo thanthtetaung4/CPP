@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:22:41 by taung             #+#    #+#             */
-/*   Updated: 2025/05/06 14:08:34 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/07 14:30:58 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 #include <iostream>
 
 /*
-When ClapTrap attacks, it causes its target to lose <attack damage> hit points.
-When ClapTrap repairs itself, it regains <amount> hit points. Attacking and repairing
-each cost 1 energy point. Of course, ClapTrap can’t do anything if it has no hit points or
-energy points left. However, since these exercises serve as an introduction, the ClapTrap
-instances should not interact directly with one another, and the parameters will not refer
-to another instance of ClapTrap.
+The reason why I use protected for inheritence is because this is probably like a game
+and directly accessing is faster than setter and getter functions calls.
+And since I don't need to use public setter and getter functions
+the values of the attributes of all the classes happens inside not outside.
+Example: if HP is updated it is 200% sure that happens inside the xx-trap
+not outside like main.cpp.
 */
 class ClapTrap {
-	private:
+	protected:
 		std::string	_name;
 		unsigned int			_HP;
 		unsigned int			_EP;
@@ -39,16 +39,7 @@ class ClapTrap {
 		void		attack(const std::string& target);
 		void		takeDamage(unsigned int amount);
 		void		beRepaired(unsigned int amount);
-		std::string	getName(void) const;
-		unsigned int			getHP(void) const;
-		unsigned int			getEP(void) const;
-		int			getDMG(void) const;
 		void		printStatus(void) const;
-		void		setName(std::string name);
-		void		setHP(unsigned int amount);
-		void		setEP(int amount);
-		void		setDMG(int amount);
-
 };
 
 #endif
