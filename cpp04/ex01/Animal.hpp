@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 20:40:17 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 21:03:29 by taung            ###   ########.fr       */
+/*   Created: 2025/05/07 15:27:29 by taung             #+#    #+#             */
+/*   Updated: 2025/05/09 16:57:51 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __BRAIN_HPP__
-#define __BRAIN_HPP__
+#ifndef __ANIMAL_HPP__
+#define __ANIMAL_HPP__
 
 #include <iostream>
+#include <cstdlib>
 
-class Brain {
+class Animal {
 	private:
-		std::string	ideas[100];
+		std::string whatAmI(void) const;
+
+	protected:
+		std::string type;
+
 	public:
-		Brain(void);
-		Brain(const Brain& other);
-		Brain&			operator=(const Brain& other);
-		~Brain();
-		void			setIdea(std::string idea, int ideaNumber);
-		std::string		getIdea(int ideaNumber) const;
-		std::string*	getIdeas(void);
-		void			displayIdeas(void) const;
+		Animal(void);
+		Animal(std::string type);
+		Animal(const Animal& other);
+		Animal&	operator=(const Animal& other);
+		~Animal();
+		void	printAnimalDetails(void) const;
 };
 
 #endif

@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   bsp.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 20:00:15 by taung             #+#    #+#             */
-/*   Updated: 2025/04/17 12:59:47 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/09 17:12:22 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
 
-// Already good
 Fixed abs(Fixed numb) {
 	if (numb.toFloat() < 0)
 		return (numb * -1);
 	return (numb);
 }
 
-// Already good
 Fixed	getArea(Point p1, Point p2, Point p3) {
 	Fixed area = (abs(p1.getX() * (p2.getY() - p3.getY())
 					+ p2.getX() * (p3.getY() - p1.getY())
@@ -27,7 +25,7 @@ Fixed	getArea(Point p1, Point p2, Point p3) {
 	return (area);
 }
 
-// New helper: Check if point is on the line segment between p1 and p2
+// Check if point is on the line segment between p1 and p2
 bool isOnEdge(Point const p1, Point const p2, Point const point) {
 	Fixed area = getArea(p1, p2, point);
 	if (area != Fixed(0))

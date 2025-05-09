@@ -5,45 +5,41 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 20:40:25 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 21:03:32 by taung            ###   ########.fr       */
+/*   Created: 2025/05/09 16:21:02 by taung             #+#    #+#             */
+/*   Updated: 2025/05/09 17:24:55 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Brain.hpp"
 
 Brain::Brain(void) {
-	std::cout << "Default Brain Constructor called" << std::endl;
+	std::cout << "Brain Default constructor called" << std::endl;
+	ideas[100] = {};
 }
 
-Brain::Brain(const Brain& other) {
-	std::cout << "Copy Brain Constructor called" << std::endl;
-	if (this != &other)
-		*this = other;
-}
-
-Brain&	Brain::operator=(const Brain& other) {
-	std::cout << "Brain Assigment operator called" << std::endl;
+Brain::Brain(Brain &other) {
 	if (this != &other) {
-		for (int i = 0; i < this->ideas->length(); i++) {
+		*this = other;
+	}
+}
+
+Brain& Brain::operator=(const Brain& other) {
+	if (this != &other) {
+		for (size_t i = 0; i < this->ideas->length(); i++) {
 			this->ideas[i] = other.ideas[i];
 		}
 	}
 	return (*this);
 }
 
-void		Brain::setIdea(std::string idea, int ideaNumber) {
-	this->ideas[ideaNumber] = idea;
+Brain::~Brain(void) {
+	std::cout << "Brain  destructor called" << std::endl;
 }
 
-std::string	Brain::getIdea(int ideaNumber) const {
-	return (this->ideas[ideaNumber]);
+void		Brain::setIdea(std::string idea, const int index) {
+	this->ideas[index] = idea;
 }
 
-std::string*	Brain::getIdeas(void) {
-	return (this->ideas);
-}
-
-Brain::~Brain() {
-	std::cout << "Brain Destroyed 😢" << std::endl;
+std::string	Brain::getIdea(const int index) const {
+	return (this->ideas[index]);
 }
