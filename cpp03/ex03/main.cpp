@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:22:45 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 14:56:32 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/09 15:44:45 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,7 @@ int main(void) {
 	d1.printStatus();
 	d1.highFivesGuys();
 	d1.whoAmI();
+
+	DiamondTrap d2(d1);
+	d2.printStatus();
 }

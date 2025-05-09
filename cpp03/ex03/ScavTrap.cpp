@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:04:23 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 14:34:05 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/09 15:42:15 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ ScavTrap::ScavTrap(void) {
 		this->_HP = 100;
 		this->_EP = 50;
 		this->_DMG = 20;
+		this->defaultEP = 50;
 }
 
 ScavTrap::ScavTrap(std::string name) {
@@ -26,6 +27,7 @@ ScavTrap::ScavTrap(std::string name) {
 		this->_HP = 100;
 		this->_EP = 50;
 		this->_DMG = 20;
+		this->defaultEP = 50;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& other) {
@@ -79,4 +81,8 @@ void	ScavTrap::printStatus(void) const {
 	<< "HP       : " << this->_HP << std::endl
 	<< "EP       : " << this->_EP << std::endl
 	<< "DMG      : " << this->_DMG << std::endl;
+}
+
+unsigned int	ScavTrap::getDefaultEP(void) const {
+	return (this->defaultEP);
 }

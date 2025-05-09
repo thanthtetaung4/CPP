@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:10:24 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 14:56:34 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/09 15:51:55 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,28 @@ DiamondTrap::DiamondTrap(void) {
 	// if the parent and derive share the same member attribute name.
 	this->_name = "a new DiamondTrap";
 	this->_HP = FragTrap::_HP;
-	this->_EP = ScavTrap::_EP;
+	this->_EP = ScavTrap::getDefaultEP();
 	this->_DMG = FragTrap::_DMG;
 }
 
-DiamondTrap::DiamondTrap(std::string name) {
+DiamondTrap::DiamondTrap(std::string name){
 std::cout << "DiamondTrap name constructor called" << std::endl;
 	this->FragTrap::_name = name + "_clap_name";
 	this->_name = name;
 	this->_HP = FragTrap::_HP;
-	this->_EP = ScavTrap::_EP;
+	this->_EP = ScavTrap::getDefaultEP();
 	this->_DMG = FragTrap::_DMG;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& other) {
 std::cout << "DiamondTrap copy constructor called" << std::endl;
-if (this != &other) {
-	*this = other;
-}
+	if (this != &other) {
+		*this = other;
+	}
 }
 
 DiamondTrap::~DiamondTrap(void) {
-std::cout << "DiamondTrap " << this->_name << " is destroyed" << std::endl;
+	std::cout << "DiamondTrap " << this->_name << " is destroyed" << std::endl;
 }
 
 void		DiamondTrap::attack(const std::string& target) {

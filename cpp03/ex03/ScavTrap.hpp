@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:04:20 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 14:40:40 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/09 15:39:44 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "ClapTrap.hpp"
 
 class ScavTrap : virtual public ClapTrap {
+	private:
+		unsigned int defaultEP;
 	public:
 		ScavTrap(void);
 		ScavTrap(std::string name);
@@ -26,6 +28,7 @@ class ScavTrap : virtual public ClapTrap {
 		void		beRepaired(unsigned int amount);
 		void		printStatus(void) const;
 		void		guardGate(void);
+		unsigned int	getDefaultEP(void) const;
 };
 
 #endif
