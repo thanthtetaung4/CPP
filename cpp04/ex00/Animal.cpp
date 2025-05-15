@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:32 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 16:07:35 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/12 20:59:47 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,15 @@ void	Animal::printAnimalDetails(void) const {
 	std::cout << this->type << std::endl;
 }
 
+std::string	Animal::getType(void) const {
+	return (this->type);
+}
+
+void		Animal::setType(std::string type) {
+	this->type = type;
+}
+
+void	Animal::makeSound(void) const {
+	std::cout << "inaudible animal sound" << std::endl;
+}
 

@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:47 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 21:05:19 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/15 14:20:35 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,47 @@
 #include "Dog.hpp"
 
 int	main(void) {
-	// Animal a;
-	// Animal b("dog");
-	// Animal c(b);
+	/*
+	Animal	animals[10];
 
-	// a = b;
+	for (int i = 0; i < 5; i++)
+	{
+		animals[i] = Dog("Dog");
+		animals[i].makeSound();
+	}
+	for (int i = 5; i < 10; i++)
+	{
+		animals[i] = Cat("Cat");
+		animals[i].makeSound();
+	}
+	*/
+	// This causes the slicing problem
+	// Cat & Dog are sliced into the Animal defeating the whole point of polymorphism.
+	// This will seg fault because Brain is not copied and Dog tries to delete the non existance Brain. (Broken Polymorphism)
 
-	// a.printAnimalDetails();
-	// b.printAnimalDetails();
-	// c.printAnimalDetails();
+	AAnimal	*a[10];
+	// AAnimal	b;
 
-	// Cat aCat;
-	// Cat bCat("cat");
-	// Cat cCat(bCat);
-
-	// aCat = bCat;
-
-	// aCat.printAnimalDetails();
-	// bCat.printAnimalDetails();
-	// cCat.printAnimalDetails();
-
-	Dog a;
-	Dog b("dog");
-	Dog c(b);
-
-	a = b;
-
-	a.printAnimalDetails();
-	b.printAnimalDetails();
-	c.printAnimalDetails();
-
-	std::string ideas[100];
+	for (int i = 0; i < 5; i++) {
+		a[i] = new Dog("Dog"); // Upcasting: Dog* -> Animal*
+		a[i]->makeSound();
+	}
+	for (int i = 5; i < 10; i++) {
+		a[i] = new Cat("Cat"); // Upcasting: Cat* -> Animal*
+		a[i]->makeSound();
+	}
+	for (int i = 0; i < 10; i++) {
+		std::cout << i << std::endl;
+		delete a[i];
+	}
 }
+
+/*
+You can store a Dog* in an Animal* because Dog is-a Animal.
+
+Upcasting (Dog* → Animal*) is safe and automatic.
+
+This allows you to build polymorphic arrays like Animal* arr[10].
+
+Virtual functions + base class pointers = runtime polymorphism.
+*/

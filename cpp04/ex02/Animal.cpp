@@ -6,33 +6,33 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:32 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 16:07:35 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/15 14:19:44 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 
-std::string Animal::whatAmI(void) const {
+std::string AAnimal::whatAmI(void) const {
 	return "Animal";
 }
 
-Animal::Animal(void) {
+AAnimal::AAnimal(void) {
 	std::cout << "Default " << whatAmI() << " Constructor called" << std::endl;
 	this->type = "animal";
 }
 
-Animal::Animal(std::string type) {
+AAnimal::AAnimal(std::string type) {
 	std::cout << "Parameterised " << whatAmI() << " Constructor called" << std::endl;
 	this->type = type;
 }
 
-Animal::Animal(const Animal& other) {
+AAnimal::AAnimal(const AAnimal& other) {
 	std::cout << "Copy " << whatAmI() << " Constructor called" << std::endl;
 	if (this != &other)
 		*this = other;
 }
 
-Animal&	Animal::operator=(const Animal& other) {
+AAnimal&	AAnimal::operator=(const AAnimal& other) {
 	std::cout << whatAmI() << " Assigment operator called" << std::endl;
 	if (this != &other) {
 		this->type = other.type;
@@ -40,12 +40,18 @@ Animal&	Animal::operator=(const Animal& other) {
 	return (*this);
 }
 
-Animal::~Animal() {
+AAnimal::~AAnimal() {
 	std::cout << whatAmI() << " " << this->type << " Destroyed 😢" << std::endl;
 }
 
-void	Animal::printAnimalDetails(void) const {
+void	AAnimal::printAnimalDetails(void) const {
 	std::cout << this->type << std::endl;
 }
 
+std::string	AAnimal::getType(void) const {
+	return (this->type);
+}
 
+void		AAnimal::setType(std::string type) {
+	this->type = type;
+}

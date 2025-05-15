@@ -6,15 +6,17 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:44 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 16:58:29 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/15 14:19:44 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
-class Dog : public Animal {
+class Dog : public AAnimal {
 	private:
 		std::string	whatAmI(void) const;
+		Brain	*brain;
 	public:
 		Dog(void);
 		Dog(std::string type);
@@ -22,4 +24,6 @@ class Dog : public Animal {
 		Dog&	operator=(const Dog& other);
 		~Dog();
 		void	makeSound(void) const;
+		std::string	think(int index) const;
+		void	ideate(int index, std::string idea);
 };

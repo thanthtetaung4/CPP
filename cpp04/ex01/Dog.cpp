@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:42 by taung             #+#    #+#             */
-/*   Updated: 2025/05/09 17:24:09 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/12 21:21:33 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ Dog::Dog(void) {
 	this->brain = new Brain();
 }
 
-Dog::Dog(std::string type) {
+Dog::Dog(std::string type) : Animal(type) {
 	std::cout << "Parameterised " << whatAmI() << " Constructor called" << std::endl;
 	this->type = type;
+	this->brain = new Brain();
 }
 
-Dog::Dog(const Dog& other) {
+Dog::Dog(const Dog& other) : Animal(other) {
 	std::cout << "Copy " << whatAmI() << " Constructor called" << std::endl;
 	if (this != &other)
 		*this = other;
@@ -42,10 +43,19 @@ Dog&	Dog::operator=(const Dog& other) {
 }
 
 Dog::~Dog() {
+	delete this->brain;
 	std::cout << whatAmI() << " " << this->type << " Destroyed 😢" << std::endl;
 }
 
 void	Dog::makeSound(void) const {
 	std::cout << "Woof" << std::endl;
-	std::cout << "I have an idea " << this->brain << std::endl;
+	// std::cout << "I have an idea " << this->brain << std::endl;
+}
+
+std::string	Dog::think(int index) const {
+	return (this->brain->getIdea(index));
+}
+
+void	Dog::ideate(int index, std::string idea) {
+	this->brain->setIdea(idea, index);
 }

@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:29 by taung             #+#    #+#             */
-/*   Updated: 2025/05/09 16:57:51 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/12 21:14:02 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define __ANIMAL_HPP__
 
 #include <iostream>
-#include <cstdlib>
 
 class Animal {
 	private:
@@ -28,8 +27,11 @@ class Animal {
 		Animal(std::string type);
 		Animal(const Animal& other);
 		Animal&	operator=(const Animal& other);
-		~Animal();
+		virtual ~Animal();
+		virtual void	makeSound(void) const;
 		void	printAnimalDetails(void) const;
+		std::string	getType(void) const;
+		void		setType(std::string type);
 };
 
 #endif
