@@ -3,10 +3,10 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Target executable
-TARGET = animalkingdom
+TARGET = matiria
 
 # Source files
-SRCS = ./main.cpp
+SRCS = ./main.cpp ./Ice.cpp ./AMateria.cpp ./Cure.cpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
