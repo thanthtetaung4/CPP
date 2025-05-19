@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:27:06 by taung             #+#    #+#             */
-/*   Updated: 2025/05/16 18:00:37 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/18 14:52:31 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define __AMATERIA_H__
 
 # include "ICharacter.hpp"
+
+class ICharacter;
 
 class AMateria
 {
