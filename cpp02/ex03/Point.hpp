@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:41:20 by taung             #+#    #+#             */
-/*   Updated: 2025/04/15 12:41:00 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/19 15:14:55 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 class Point {
 	private:
-		Fixed	_x;
-		Fixed	_y;
+		const Fixed	_x;
+		const Fixed	_y;
 
 	public:
 		Point(void);
