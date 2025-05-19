@@ -6,7 +6,7 @@ CXXFLAGS = #-Wall -Wextra -Werror -std=c++98
 TARGET = matiria
 
 # Source files
-SRCS = ./main.cpp ./Ice.cpp ./AMateria.cpp ./Cure.cpp ./Character.cpp
+SRCS = ./main.cpp ./Ice.cpp ./AMateria.cpp ./Cure.cpp ./Character.cpp ./MateriaSource.cpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)

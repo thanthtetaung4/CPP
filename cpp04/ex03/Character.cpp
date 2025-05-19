@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:25:21 by taung             #+#    #+#             */
-/*   Updated: 2025/05/18 15:20:16 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/19 20:40:37 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ Character&	Character::operator=(const Character &other) {
 
 Character::~Character(void) {
 	for (int i = 0; i < 4; i++) {
+		if (foundInTrash(0, _inventory[i]))
+			continue;
 		delete _inventory[i];
 		this->_inventory[i] = NULL;
 	}
@@ -60,7 +62,7 @@ Character::~Character(void) {
 			trash[i] = NULL;
 		}
 	}
-	delete trash;
+	delete []trash;
 	trash = NULL;
 	std::cout << "Character destroyed" << std::endl;
 }
@@ -74,9 +76,21 @@ int	Character::availableSot(void) {
 	return (-1);
 }
 
+//Find the unequipped item in the trash from idx
+bool	Character::foundInTrash(int idx, AMateria *m) {
+	while (idx < this->trashCount) {
+		if (trash[idx] == m)
+			return (true);
+		idx++;
+	}
+	return (false);
+}
+
 // Calculate and realloc the trash arrays to store trash inventory items
-void	addToTrash(AMateria**& trash, int& count, AMateria* m) {
+void	Character::addToTrash(AMateria**& trash, int& count, AMateria* m) {
 	AMateria** newTrash = new AMateria*[count + 1]();
+	if (foundInTrash(0, m))
+		return;
 	for (int i = 0; i < count; ++i)
 		newTrash[i] = trash[i];
 	newTrash[count] = m;
@@ -84,7 +98,6 @@ void	addToTrash(AMateria**& trash, int& count, AMateria* m) {
 	trash = newTrash;
 	count++;
 }
-
 
 void	Character::equip(AMateria* m) {
 	int	idx;
@@ -94,22 +107,34 @@ void	Character::equip(AMateria* m) {
 		std::cout << "Inventory is full" << std::endl;
 	}
 	else {
+		if (!m)
+			return;
 		this->_inventory[idx] = m;
+		std::cout << this->_name << " equipped " << this->_inventory[idx]->getType() << std::endl;
 	}
 }
 
 void	Character::unequip(int idx) {
-	if (0 <= idx <= 3) {
-
-		this->_inventory[idx] = NULL;
+	if (idx >= 0 && idx <= 3) {
+		if (!foundInTrash(0, this->_inventory[idx]))
+		{
+			addToTrash(this->trash, this->trashCount, this->_inventory[idx]);
+			std::cout << this->_inventory[idx]->getType() << " unequipped from " << this->_name << std::endl;
+			this->_inventory[idx] = NULL;
+		}
 	}
 	else {
 		std::cout << "Inventory slot unavailable!" << std::endl;
 	}
 }
 
-void	Character::use(int, ICharacter&) {
-
+void	Character::use(int idx, ICharacter& target) {
+	if (this->_inventory[idx] != NULL) {
+		std::cout << this->_name << " ";
+		this->_inventory[idx]->use(target);
+	}
+	else
+		std::cout << "nothing is equipped at this inventory slot" << std::endl;
 }
 
 std::string const & Character::getName() const {

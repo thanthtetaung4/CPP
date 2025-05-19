@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:07:48 by taung             #+#    #+#             */
-/*   Updated: 2025/05/18 15:13:25 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/19 15:09:12 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ class Character : public ICharacter {
 	protected:
 		int	availableSot(void);
 		void	addToTrash(AMateria**& trash, int& count, AMateria* m);
+		bool	foundInTrash(int idx, AMateria* m);
 	public:
 		Character(void);
 		Character(std::string name);

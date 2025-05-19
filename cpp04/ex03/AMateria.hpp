@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:27:06 by taung             #+#    #+#             */
-/*   Updated: 2025/05/18 14:52:31 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/19 20:19:39 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class AMateria
 	public:
 		AMateria(void);
 		AMateria(std::string const &type);
-		AMateria(AMateria &other);
+		AMateria(const AMateria &other);
 		virtual	~AMateria(void);
 		AMateria& operator=(const AMateria &other);
 		std::string const &	getType() const; //Returns the materia type

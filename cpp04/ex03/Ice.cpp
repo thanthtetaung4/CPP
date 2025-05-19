@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:37:20 by taung             #+#    #+#             */
-/*   Updated: 2025/05/16 17:59:03 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/19 21:17:01 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ Ice::Ice(std::string const &type) : AMateria(type) {
 	std::cout << "Parameterized Ice constructor called" << std::endl;
 }
 
-Ice::Ice(void) : AMateria() {
+Ice::Ice(void) : AMateria("ice") {
 	std::cout << "Default Ice constructor called" << std::endl;
 }
 
-Ice::Ice(Ice &other) : AMateria(other) {
+Ice::Ice(const Ice &other) : AMateria("ice") {
 	std::cout << "Copy Assigment Ice constructor called" << std::endl;
 	if (this != &other)
 	{
@@ -42,7 +42,9 @@ Ice& Ice::operator=(const Ice &other) {
 }
 
 AMateria*	Ice::clone() const {
-	return ((AMateria*)this);
+	AMateria *newIce = new Ice(*this);
+	std::cout << "cloning " << newIce->getType() << std::endl;
+	return (newIce);
 }
 
 void	Ice::use(ICharacter& target) {

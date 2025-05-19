@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:30:14 by taung             #+#    #+#             */
-/*   Updated: 2025/05/16 18:06:04 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/19 20:17:51 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class	Cure: public AMateria {
 	public:
 		Cure(void);
 		Cure(std::string const &type);
-		Cure(Cure &other);
+		Cure(const Cure &other);
 		~Cure(void);
 		Cure& operator=(const Cure& other);
 		AMateria*	clone() const;

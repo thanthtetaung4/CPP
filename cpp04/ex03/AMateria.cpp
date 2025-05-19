@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:41:04 by taung             #+#    #+#             */
-/*   Updated: 2025/05/16 17:59:14 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/19 20:33:25 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ AMateria::AMateria(void) {
 	std::cout << "Default AMateria constructor called" << std::endl;
 }
 
-AMateria::AMateria(AMateria &other) {
+AMateria::AMateria(const AMateria &other) {
 	std::cout << "Copy Assigment AMateria constructor called" << std::endl;
-	if (this != &other)
-	{
+	if (this != &other) {
 		*this = other;
 	}
 }
@@ -35,8 +34,7 @@ AMateria::~AMateria(void) {
 
 AMateria& AMateria::operator=(const AMateria &other) {
 	std::cout << "Assigment AMateria operator called" << std::endl;
-	if (this != &other)
-	{
+	if (this != &other) {
 		// this->type = other.type;
 	}
 	return (*this);

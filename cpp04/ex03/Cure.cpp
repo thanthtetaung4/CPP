@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:37:32 by taung             #+#    #+#             */
-/*   Updated: 2025/05/16 17:59:11 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/19 21:17:08 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ Cure::Cure(std::string const &type) : AMateria(type) {
 	std::cout << "Cure parameterized constructor called" << std::endl;
 }
 
-Cure::Cure(void) : AMateria() {
+Cure::Cure(void) : AMateria("cure") {
 	std::cout << "Default Cure constructor called" << std::endl;
 }
 
-Cure::Cure(Cure &other) : AMateria(other) {
+Cure::Cure(const Cure &other) : AMateria("cure") {
 	std::cout << "Copy Assigment Cure constructor called" << std::endl;
 	if (this != &other)
 	{
@@ -42,7 +42,7 @@ Cure& Cure::operator=(const Cure &other) {
 }
 
 AMateria*	Cure::clone() const {
-	return ((AMateria*)this);
+	return new Cure(*this);
 }
 
 void	Cure::use(ICharacter& target) {
