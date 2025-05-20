@@ -3,7 +3,7 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Target executable
-TARGET = ex00
+TARGET = ex01
 
 # Source files
 SRCS = ./Zombie.cpp ./main.cpp ./zombieHorde.cpp

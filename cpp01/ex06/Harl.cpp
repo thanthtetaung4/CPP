@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 17:19:24 by taung             #+#    #+#             */
-/*   Updated: 2025/03/28 12:03:45 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/20 21:13:27 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,23 @@ void	Harl::complain(std::string level) {
 
 		switch (hlevel)
 		{
-		case 0:
-			(this->*funcs[0])();
-			std::cout << std::endl;
-		case 1:
-			(this->*funcs[1])();
-			std::cout << std::endl;
-		case 2:
-			(this->*funcs[2])();
-			std::cout << std::endl;
-		case 3:
-			(this->*funcs[3])();
-			break;
-		default:
-			std::cout << "[INVALID]"
-			<< std::endl
-			<< "Invalid complaint level!" << std::endl;
-			break;
+			case 0:
+				(this->*funcs[0])();
+				std::cout << std::endl;
+			case 1:
+				(this->*funcs[1])();
+				std::cout << std::endl;
+			case 2:
+				(this->*funcs[2])();
+				std::cout << std::endl;
+			case 3:
+				(this->*funcs[3])();
+				break;
+			default:
+				std::cout << "[INVALID]"
+				<< std::endl
+				<< "Invalid complaint level!" << std::endl;
+				break;
 		}
 
 }
