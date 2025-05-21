@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:25:55 by taung             #+#    #+#             */
-/*   Updated: 2025/04/14 14:03:41 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/21 15:42:10 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class	Fixed {
 
 	public:
 		Fixed(void);
-		Fixed(const Fixed& other);\
+		Fixed(const Fixed& other);
 		Fixed(const int i);
 		Fixed(const float f);
 		float			toFloat( void ) const;
@@ -45,10 +45,10 @@ class	Fixed {
 		static Fixed&	min(const Fixed& p1,const Fixed& p2);
 		static Fixed&	max(Fixed& p1, Fixed& p2);
 		static Fixed&	max(const Fixed& p1,const Fixed& p2);
-		friend std::ostream&	operator<<(std::ostream& os, const Fixed &fixed);
 		~Fixed();
 		int getRawBits( void ) const;
 		void setRawBits( int const raw );
 };
+std::ostream&	operator<<(std::ostream& os, const Fixed &fixed);
 
 #endif
