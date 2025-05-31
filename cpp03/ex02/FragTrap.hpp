@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.h                                         :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:31:53 by taung             #+#    #+#             */
-/*   Updated: 2025/05/06 13:37:29 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/31 14:21:36 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@
 #include "ClapTrap.hpp"
 
 class FragTrap : public ClapTrap {
+	private:
+		const std::string	myName(void) const;
 	public:
 		FragTrap(void);
 		FragTrap(std::string name);
 		FragTrap(const FragTrap& other);
 		~FragTrap();
 		void		attack(const std::string& target);
-		void		takeDamage(unsigned int amount);
-		void		beRepaired(unsigned int amount);
-		void		printStatus(void) const;
 		void		highFivesGuys(void);
 };
 

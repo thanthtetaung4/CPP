@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 15:12:43 by taung             #+#    #+#             */
-/*   Updated: 2025/03/21 15:24:04 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/30 15:24:07 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class	Weapon {
 		Weapon(void);
 		Weapon(const std::string type);
 		~Weapon(void);
-		const std::string&	getType(void);
+		const std::string&	getType(void) const;
 		void			setType(const std::string type);
 };
 #endif

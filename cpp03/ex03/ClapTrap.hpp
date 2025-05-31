@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:22:41 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 14:30:58 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/31 11:30:22 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ Example: if HP is updated it is 200% sure that happens inside the xx-trap
 not outside like main.cpp.
 */
 class ClapTrap {
+	private:
+		const virtual std::string	myName(void) const;
 	protected:
 		std::string	_name;
 		unsigned int			_HP;
@@ -40,6 +42,14 @@ class ClapTrap {
 		void		takeDamage(unsigned int amount);
 		void		beRepaired(unsigned int amount);
 		void		printStatus(void) const;
+		std::string	getName(void) const;
+		unsigned int			getHP(void) const;
+		unsigned int			getEP(void) const;
+		int			getDMG(void) const;
+		void		setName(std::string name);
+		void		setHP(unsigned int amount);
+		void		setEP(int amount);
+		void		setDMG(int amount);
 };
 
 #endif

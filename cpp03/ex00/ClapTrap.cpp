@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:22:43 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 14:23:22 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/31 10:55:08 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		ClapTrap::attack(const std::string& target) {
 
 void		ClapTrap::takeDamage(unsigned int amount) {
 	std::cout << "ClapTrap " << this->_name
-		<< " takes" << amount << " points of damage!"
+		<< " takes " << amount << " points of damage!"
 		<<std::endl;
 		if (this->_HP < amount)
 			this->_HP = 0;
@@ -95,6 +95,8 @@ void		ClapTrap::beRepaired(unsigned int amount) {
 		this->_HP += amount;
 		this->_EP--;
 	}
+	else
+		std::cout << "\033[1;31mUnable to repair a dead ClapTrap 😵 \033[0m" << std::endl;
 }
 
 std::string	ClapTrap::getName(void) const {

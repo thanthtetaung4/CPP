@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 15:12:46 by taung             #+#    #+#             */
-/*   Updated: 2025/05/20 14:36:29 by taung            ###   ########.fr       */
+/*   Updated: 2025/05/30 15:24:18 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Weapon::~Weapon(void) {
 	std::cout << "Weapon " << this->_type << " destroyed" << std::endl;
 }
 
-const	std::string&	Weapon::getType(void) {
+const	std::string&	Weapon::getType(void) const{
 	return	(const std::string&)_type;
 }
 
