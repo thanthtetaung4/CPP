@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:25:21 by taung             #+#    #+#             */
-/*   Updated: 2025/05/19 20:40:37 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/01 14:53:49 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,83 @@ Character::Character(std::string name) {
 }
 
 Character::Character(Character &other) {
-	if (this != &other) {
-		*this = other;
+	this->_name = other._name;
+	this->trashCount = other.trashCount;
+
+	for (int i = 0; i < 4; i++) {
+		if (other._inventory[i])
+			this->_inventory[i] = other._inventory[i]->clone();
+		else
+			this->_inventory[i] = NULL;
 	}
+
+	if (other.trashCount > 0) {
+		this->trash = new AMateria*[other.trashCount]();
+		for (int i = 0; i < other.trashCount; i++) {
+			this->trash[i] = other.trash[i]->clone();
+		}
+	} else {
+		this->trash = NULL;
+	}
+
 	std::cout << "Copy Character constructor called" << std::endl;
 }
 
-Character&	Character::operator=(const Character &other) {
+
+// Character&	Character::operator=(const Character &other) {
+// 	if (this != &other) {
+// 		this->_name = other._name;
+// 		this->trashCount = other.trashCount;
+// 		for (int i = 0; i < 4; i++) {
+// 			if (this->_inventory[i])
+// 				delete this->_inventory[i];
+// 			this->_inventory[i] = other._inventory[i]->clone();
+// 		}
+// 		for (int i = 0; i < other.trashCount; i++) {
+// 			if (this->trash[i])
+// 				delete this->trash[i];
+// 			this->trash[i] = other.trash[i]->clone();
+// 		}
+// 	}
+// 	std::cout << "Copy assignment character operator called" << std::endl;
+// 	return (*this);
+// }
+
+Character& Character::operator=(const Character &other) {
 	if (this != &other) {
 		this->_name = other._name;
+
+		// Clean existing inventory
 		for (int i = 0; i < 4; i++) {
-			this->_inventory[i] = other._inventory[i];
+			if (this->_inventory[i]) {
+				delete this->_inventory[i];
+				this->_inventory[i] = NULL;
+			}
+		}
+
+		// Deep copy other inventory
+		for (int i = 0; i < 4; i++) {
+			if (other._inventory[i])
+				this->_inventory[i] = other._inventory[i]->clone();
+			else
+				this->_inventory[i] = NULL;
+		}
+
+		// Clean existing trash
+		for (int i = 0; i < this->trashCount; i++) {
+			delete this->trash[i];
+		}
+		delete[] this->trash;
+
+		// Deep copy other trash
+		this->trashCount = other.trashCount;
+		if (other.trashCount > 0) {
+			this->trash = new AMateria*[other.trashCount]();
+			for (int i = 0; i < other.trashCount; i++) {
+				this->trash[i] = other.trash[i]->clone();
+			}
+		} else {
+			this->trash = NULL;
 		}
 	}
 	std::cout << "Copy assignment character operator called" << std::endl;
@@ -50,12 +116,14 @@ Character&	Character::operator=(const Character &other) {
 }
 
 Character::~Character(void) {
+	// Clean Inventory
 	for (int i = 0; i < 4; i++) {
-		if (foundInTrash(0, _inventory[i]))
+		if (foundInTrash(0, _inventory[i])) // Skip if the current materia is in iventory (can only happens when eq->uneq->eq)
 			continue;
 		delete _inventory[i];
 		this->_inventory[i] = NULL;
 	}
+	// Clean Trash
 	for (int i = 0; i < trashCount; i++) {
 		if (trash[i]) {
 			delete trash[i];

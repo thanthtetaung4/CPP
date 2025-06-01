@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:47 by taung             #+#    #+#             */
-/*   Updated: 2025/06/01 13:29:33 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/01 14:47:31 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,21 +165,26 @@ void test_dog_cat_sound_and_type() {
 	assert(d.getType() == "Dog");
 	std::cout << "\033[1;32mPASS\033[0m: d.getType() == \"Dog\" ✅" << std::endl;
 	d.makeSound();
+	std::cout << "\033[1;33mCHECK: Is it Dog sound❔\033[0m" << std::endl;
 
 	Dog d2("Bulldog");
 	assert(d2.getType() == "Bulldog");
 	std::cout << "\033[1;32mPASS\033[0m: d2.getType() == \"Bulldog\" ✅" << std::endl;
 	d2.makeSound();
+	std::cout << "\033[1;33mCHECK: Is it Dog sound❔\033[0m" << std::endl;
 
 	Cat c;
 	assert(c.getType() == "Cat");
 	std::cout << "\033[1;32mPASS\033[0m: c.getType() == \"Cat\" ✅" << std::endl;
 	c.makeSound();
+	std::cout << "\033[1;33mCHECK: Is it Cat sound❔\033[0m" << std::endl;
 
 	Cat c2("Siamese");
 	assert(c2.getType() == "Siamese");
 	std::cout << "\033[1;32mPASS\033[0m: c2.getType() == \"Siamese\" ✅" << std::endl;
 	c2.makeSound();
+	std::cout << "\033[1;33mCHECK: Is it Cat sound❔\033[0m" << std::endl;
+
 	std::cout << "\033[1;32m[PASS] Dog/Cat sound and type\033[0m\n" << std::endl;
 }
 
@@ -195,7 +200,9 @@ void test_polymorphism() {
 	std::cout << "\033[1;32mPASS\033[0m: animals[1]->getType() == \"Cat\" ✅" << std::endl;
 
 	animals[0]->makeSound();
+	std::cout << "\033[1;33mCHECK: Is it Dog sound❔\033[0m" << std::endl;
 	animals[1]->makeSound();
+	std::cout << "\033[1;33mCHECK: Is it Cat sound❔\033[0m" << std::endl;
 
 	delete animals[0];
 	delete animals[1];
@@ -240,13 +247,13 @@ void test_brain_basics() {
 }
 
 int main() {
-	std::cout << "===== ex02 TESTS START =====" << std::endl;
+	std::cout << "\033[1;34m===== ex02 TESTS START =====\033[0m" << std::endl;
 	test_brain_basics();
 	test_brain_deep_copy_dog();
 	test_brain_deep_copy_cat();
 	test_dog_cat_sound_and_type();
 	test_polymorphism();
-	std::cout << "===== ex02 TESTS END =====" << std::endl;
-	std::cout << "All ex02 tests passed!" << std::endl;
+	std::cout << "\033[1;34m===== ex02 TESTS END =====\033[0m" << std::endl;
+	std::cout << "\033[1;32mAll ex02 tests passed!\033[0m" << std::endl;
 	return 0;
 }

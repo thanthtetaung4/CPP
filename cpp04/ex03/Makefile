@@ -3,7 +3,7 @@ CXX = c++
 CXXFLAGS = #-Wall -Wextra -Werror -std=c++98
 
 # Target executable
-TARGET = matiria
+TARGET = materia
 
 # Source files
 SRCS = ./main.cpp ./Ice.cpp ./AMateria.cpp ./Cure.cpp ./Character.cpp ./MateriaSource.cpp

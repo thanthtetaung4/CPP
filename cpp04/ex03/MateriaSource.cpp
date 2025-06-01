@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:53:04 by taung             #+#    #+#             */
-/*   Updated: 2025/05/19 21:21:45 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/01 14:34:27 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	MateriaSource::learnMateria(AMateria* m) {
 		if (materias[i] == NULL) {
 			// std::cout << "cloning" << std::endl;
 			materias[i] = m->clone();
+			return;
 			// std::cout << m->getType() << " is clonned as " << materias[i]->getType() << std::endl;
 		}
 	}
@@ -63,10 +64,11 @@ the type is unknown.
 AMateria*	MateriaSource::createMateria(std::string const & type) {
 	for (size_t i = 0; i < 4; i++) {
 		// std::cout << "materias type :" << this->materias[i]->getType() << " and parameter type :" << type << std::endl;
-		if (this->materias[i]->getType() == type) {
+
+		if (this->materias[i] && this->materias[i]->getType() == type) {
 			return (this->materias[i]->clone());
 		}
 	}
-	return (0);
+	return (NULL);
 }
 

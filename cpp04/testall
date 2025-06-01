@@ -1,0 +1,4 @@
+testcpp ex00 ./animalkingdom &&
+testcpp ex01 ./animalkingdom &&
+testcpp ex02 ./animalkingdom &&
+testcpp ex03 ./materia
