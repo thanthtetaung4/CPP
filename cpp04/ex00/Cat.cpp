@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:36 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 16:51:21 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/01 12:13:11 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Cat::Cat(std::string type) {
 	this->type = type;
 }
 
-Cat::Cat(const Cat& other) {
+Cat::Cat(const Cat& other) : Animal(other) {
 	std::cout << "Copy " << whatAmI() << " Constructor called" << std::endl;
 	if (this != &other)
 		*this = other;

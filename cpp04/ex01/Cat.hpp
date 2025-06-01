@@ -6,9 +6,12 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:39 by taung             #+#    #+#             */
-/*   Updated: 2025/05/12 21:19:52 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/01 13:00:45 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+# ifndef __CAT_HPP__
+# define __CAT_HPP__
 
 #include "Animal.hpp"
 #include "Brain.hpp"
@@ -24,4 +27,9 @@ class Cat : public Animal {
 		Cat&	operator=(const Cat& other);
 		~Cat();
 		void	makeSound(void) const;
+		std::string	think(int index) const;
+		void	ideate(int index, std::string idea);
+		const Brain*	getBrain() const;
 };
+
+# endif

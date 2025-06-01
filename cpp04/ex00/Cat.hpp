@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:39 by taung             #+#    #+#             */
-/*   Updated: 2025/05/12 21:05:38 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/01 12:11:33 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ class Cat : public Animal {
 		Cat(const Cat& other);
 		Cat&	operator=(const Cat& other);
 		~Cat();
-		void	makeSound(void) const override;
+		void	makeSound(void) const;
 };

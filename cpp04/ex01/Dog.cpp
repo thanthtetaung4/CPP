@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:42 by taung             #+#    #+#             */
-/*   Updated: 2025/05/12 21:21:33 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/01 13:01:42 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,22 @@ Dog::Dog(std::string type) : Animal(type) {
 
 Dog::Dog(const Dog& other) : Animal(other) {
 	std::cout << "Copy " << whatAmI() << " Constructor called" << std::endl;
-	if (this != &other)
-		*this = other;
+	if (this != &other) {
+		this->type = other.type;
+		this->brain = new Brain(*other.brain);
+	}
+		// *this = other;
 }
 
 Dog&	Dog::operator=(const Dog& other) {
+	Brain	*tmp;
+
 	std::cout << whatAmI() << " Assigment operator called" << std::endl;
 	if (this != &other) {
 		this->type = other.type;
+		tmp = this->brain;
+		delete tmp;
+		this->brain = new Brain(*other.brain);
 	}
 	return (*this);
 }
@@ -58,4 +66,8 @@ std::string	Dog::think(int index) const {
 
 void	Dog::ideate(int index, std::string idea) {
 	this->brain->setIdea(idea, index);
+}
+
+const Brain*	Dog::getBrain() const {
+	return (this->brain);
 }

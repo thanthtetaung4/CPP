@@ -6,11 +6,14 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:39 by taung             #+#    #+#             */
-/*   Updated: 2025/05/15 14:19:44 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/01 13:14:18 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+# ifndef __CAT_HPP__
+# define __CAT_HPP__
+
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 
 class Cat : public AAnimal {
@@ -24,4 +27,9 @@ class Cat : public AAnimal {
 		Cat&	operator=(const Cat& other);
 		~Cat();
 		void	makeSound(void) const;
+		std::string	think(int index) const;
+		void	ideate(int index, std::string idea);
+		const Brain*	getBrain() const;
 };
+
+# endif

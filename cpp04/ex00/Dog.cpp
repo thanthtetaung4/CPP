@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:42 by taung             #+#    #+#             */
-/*   Updated: 2025/05/07 16:58:47 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/01 13:51:30 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Dog::Dog(std::string type) {
 	this->type = type;
 }
 
-Dog::Dog(const Dog& other) {
+Dog::Dog(const Dog& other) : Animal(other) {
 	std::cout << "Copy " << whatAmI() << " Constructor called" << std::endl;
 	if (this != &other)
 		*this = other;
@@ -45,5 +45,5 @@ Dog::~Dog() {
 }
 
 void	Dog::makeSound(void) const {
-	std::cout << "Meow" << std::endl;
+	std::cout << "Woof" << std::endl;
 }

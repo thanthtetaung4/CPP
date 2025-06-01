@@ -6,9 +6,12 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:44 by taung             #+#    #+#             */
-/*   Updated: 2025/05/12 21:18:38 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/01 13:00:55 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+# ifndef __DOG_HPP__
+# define __DOG_HPP__
 
 #include "Animal.hpp"
 #include "Brain.hpp"
@@ -26,4 +29,7 @@ class Dog : public Animal {
 		void	makeSound(void) const;
 		std::string	think(int index) const;
 		void	ideate(int index, std::string idea);
+		const Brain*	getBrain() const;
 };
+
+# endif
