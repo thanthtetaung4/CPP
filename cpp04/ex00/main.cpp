@@ -6,63 +6,42 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:47 by taung             #+#    #+#             */
-/*   Updated: 2025/06/01 13:52:45 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/06 13:42:01 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// #include "Animal.hpp"
-// #include "Cat.hpp"
-// #include "Dog.hpp"
-
-// int	main(void) {
-// 	// Animal a;
-// 	// Animal b("dog");
-// 	// Animal c(b);
-
-// 	// a = b;
-
-// 	// a.printAnimalDetails();
-// 	// b.printAnimalDetails();
-// 	// c.printAnimalDetails();
-
-// 	// Cat aCat;
-// 	// Cat bCat("cat");
-// 	// Cat cCat(bCat);
-
-// 	// aCat = bCat;
-
-// 	// aCat.printAnimalDetails();
-// 	// bCat.printAnimalDetails();
-// 	// cCat.printAnimalDetails();
-
-// 	Dog a;
-// 	Dog b("dog");
-// 	Dog c(b);
-
-// 	a = b;
-
-// 	a.printAnimalDetails();
-// 	b.printAnimalDetails();
-// 	c.printAnimalDetails();
-// }
-
-
-// int main()
-// {
-// 	const Animal* meta = new Animal();
-// 	const Animal* j = new Dog();
-// 	const Animal* i = new Cat();
-// 	std::cout << j->getType() << " " << std::endl;
-// 	std::cout << i->getType() << " " << std::endl;
-// 	i->makeSound(); //will output the cat sound!
-// 	j->makeSound();
-// 	meta->makeSound();
-// 	return 0;
-// }
 
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
+
+void test(void);
+
+int main()
+{
+	const Animal* meta = new Animal();
+	const Animal* d = new Dog();
+	const Animal* c = new Cat();
+	std::cout << d->getType() << " " << std::endl;
+	d->makeSound();
+	std::cout << c->getType() << " " << std::endl;
+	c->makeSound();
+	meta->makeSound();
+
+	WrongAnimal *wc = new WrongCat();
+	wc->makeSound();
+
+	delete meta;
+	delete d;
+	delete c;
+	delete wc;
+
+	test();
+
+	return 0;
+}
+
 #include <cassert>
 #include <iostream>
 
@@ -162,7 +141,7 @@ void test_polymorphism() {
 	std::cout << "\033[1;32m[PASS] Polymorphism with Animal*\033[0m\n" << std::endl;
 }
 
-int main() {
+void test(void) {
 	std::cout << "\033[1;34m===== ex00 TESTS START =====\033[0m" << std::endl;
 	test_animal_basics();
 	test_dog_basics();
@@ -170,5 +149,4 @@ int main() {
 	test_polymorphism();
 	std::cout << "\033[1;34m===== ex00 TESTS END =====\033[0m" << std::endl;
 	std::cout << "\033[1;32mAll ex00 tests passed!\033[0m" << std::endl;
-	return 0;
 }
