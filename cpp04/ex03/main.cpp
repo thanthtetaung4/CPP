@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:25:16 by taung             #+#    #+#             */
-/*   Updated: 2025/06/01 14:47:44 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/06 18:58:52 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,35 @@
 # include "Character.hpp"
 # include "MateriaSource.hpp"
 #include <cassert>
+
+void test();
+
+int	main()
+{
+	IMateriaSource* src = new MateriaSource();
+	Ice *ice = new Ice();
+	src->learnMateria(ice);
+	Cure *cure = new Cure();
+	src->learnMateria(cure);
+	ICharacter* me = new Character("me");
+	AMateria* tmp;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	ICharacter* bob = new Character("bob");
+	me->use(0, *bob);
+	me->use(1, *bob);
+	delete bob;
+	delete me;
+	delete src;
+	delete ice;
+	delete cure;
+
+	test();
+
+	return 0;
+}
 
 void test_AMateria_basics() {
 	std::cout << "\033[1;34m[TEST] AMateria basics...\033[0m" << std::endl;
@@ -128,7 +157,7 @@ void test_full_flow() {
 	std::cout << "\033[1;32m[PASS] Full flow\033[0m\n" << std::endl;
 }
 
-int main() {
+void test() {
 	std::cout << "\033[1;34m===== ex03 TESTS START =====\033[0m" << std::endl;
 	test_AMateria_basics();
 	test_Character_basics();
@@ -136,6 +165,4 @@ int main() {
 	test_full_flow();
 	std::cout << "\033[1;34m===== ex03 TESTS END =====\033[0m" << std::endl;
 	std::cout << "\033[1;32mAll ex03 tests passed!\033[0m" << std::endl;
-	return 0;
 }
-// ...existing code...
