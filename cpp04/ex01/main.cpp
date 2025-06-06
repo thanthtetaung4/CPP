@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:47 by taung             #+#    #+#             */
-/*   Updated: 2025/06/01 13:37:09 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/06 14:03:31 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,29 @@
 #include <cassert>
 #include <iostream>
 
-void test_animal_basics() {
+void	test(void);
+
+int	main(void) {
+	Animal	*a[10];
+
+	for (int i = 0; i < 5; i++)
+		a[i] = new Dog("Dog");
+
+	for (int i = 5; i < 10; i++)
+		a[i] = new Cat("Cat");
+
+	for (int i = 0; i < 10; i++)
+		a[i]->makeSound();
+
+	for (int i = 0; i < 10; i++) {
+		delete a[i];
+		std::cout << i << " is deleted" << std::endl;
+	}
+
+	test();
+}
+
+void	test_animal_basics() {
 	std::cout << "\033[1;34m[TEST] Animal basics...\033[0m" << std::endl;
 	Animal a;
 	assert(a.getType() == "animal");
@@ -42,7 +64,7 @@ void test_animal_basics() {
 	std::cout << "\033[1;32m[PASS] Animal basics\033[0m\n" << std::endl;
 }
 
-void test_brain_basics() {
+void	test_brain_basics() {
 	std::cout << "\033[1;34m[TEST] Brain basics...\033[0m" << std::endl;
 	Brain b1;
 	b1.setIdea("Eat", 0);
@@ -79,7 +101,7 @@ void test_brain_basics() {
 	std::cout << "\033[1;32m[PASS] Brain basics\033[0m\n" << std::endl;
 }
 
-void test_brain_deep_copy_dog() {
+void	test_brain_deep_copy_dog() {
 	std::cout << "\033[1;34m[TEST] Dog deep copy (Brain)...\033[0m" << std::endl;
 	Dog d1("Dog");
 	d1.ideate(0, "Chase the cat");
@@ -125,7 +147,7 @@ void test_brain_deep_copy_dog() {
 	std::cout << "\033[1;32m[PASS] Dog deep copy (Brain)\033[0m\n" << std::endl;
 }
 
-void test_brain_deep_copy_cat() {
+void	test_brain_deep_copy_cat() {
 	std::cout << "\033[1;34m[TEST] Cat deep copy (Brain)...\033[0m" << std::endl;
 	Cat c1("Cat");
 	c1.ideate(0, "Catch mouse");
@@ -171,7 +193,7 @@ void test_brain_deep_copy_cat() {
 	std::cout << "\033[1;32m[PASS] Cat deep copy (Brain)\033[0m\n" << std::endl;
 }
 
-void test_dog_cat_sound_and_type() {
+void	test_dog_cat_sound_and_type() {
 	std::cout << "\033[1;34m[TEST] Dog/Cat sound and type...\033[0m" << std::endl;
 	Dog d;
 	assert(d.getType() == "Dog");
@@ -200,7 +222,7 @@ void test_dog_cat_sound_and_type() {
 	std::cout << "\033[1;32m[PASS] Dog/Cat sound and type\033[0m\n" << std::endl;
 }
 
-void test_polymorphism() {
+void	test_polymorphism() {
 	std::cout << "\033[1;34m[TEST] Polymorphism with Animal*...\033[0m" << std::endl;
 	Animal* animals[2];
 	animals[0] = new Dog("Dog");
@@ -221,7 +243,7 @@ void test_polymorphism() {
 	std::cout << "\033[1;32m[PASS] Polymorphism with Animal*\033[0m\n" << std::endl;
 }
 
-int main() {
+void	test(void) {
 	std::cout << "\033[1;34m===== ex01 TESTS START =====\033[0m" << std::endl;
 	test_animal_basics();
 	test_brain_basics();
@@ -231,5 +253,4 @@ int main() {
 	test_polymorphism();
 	std::cout << "\033[1;34m===== ex01 TESTS END =====\033[0m" << std::endl;
 	std::cout << "\033[1;32mAll ex01 tests passed!\033[0m" << std::endl;
-	return 0;
 }
