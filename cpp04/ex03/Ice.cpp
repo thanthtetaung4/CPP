@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Ice.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:37:20 by taung             #+#    #+#             */
-/*   Updated: 2025/05/19 21:17:01 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/10 19:23:03 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ Ice::~Ice(void) {
 
 Ice& Ice::operator=(const Ice &other) {
 	std::cout << "Assigment Ice operator called" << std::endl;
-	if (this != &other)
-	{
-		// this->type = other.type;
-	}
+	(void) other;
 	return (*this);
 }
 

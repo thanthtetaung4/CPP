@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:37:32 by taung             #+#    #+#             */
-/*   Updated: 2025/05/19 21:17:08 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/10 19:22:36 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
-
-Cure::Cure(std::string const &type) : AMateria(type) {
-	std::cout << "Cure parameterized constructor called" << std::endl;
-}
 
 Cure::Cure(void) : AMateria("cure") {
 	std::cout << "Default Cure constructor called" << std::endl;
@@ -34,10 +30,7 @@ Cure::~Cure(void) {
 
 Cure& Cure::operator=(const Cure &other) {
 	std::cout << "Assigment Cure operator called" << std::endl;
-	if (this != &other)
-	{
-		// this->type = other.type;
-	}
+	(void) other;
 	return (*this);
 }
 

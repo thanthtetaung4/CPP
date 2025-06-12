@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:47 by taung             #+#    #+#             */
-/*   Updated: 2025/06/06 13:42:01 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/08 18:38:30 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 #include "Cat.hpp"
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
+#include <cassert>
+#include <iostream>
 
 void test(void);
 
 int main()
 {
+	std::cout << "\033[1;34m===== ex00 TESTS START =====\033[0m" << std::endl;
+
+	std::cout << "\033[1;34m[TEST] Subject Test Start...\033[0m" << std::endl;
 	const Animal* meta = new Animal();
 	const Animal* d = new Dog();
 	const Animal* c = new Cat();
@@ -32,18 +37,20 @@ int main()
 	WrongAnimal *wc = new WrongCat();
 	wc->makeSound();
 
+	std::cout << "\033[1;32m[PASS] Subject Test Passed ✅\033[0m\n" << std::endl;
+
 	delete meta;
 	delete d;
 	delete c;
 	delete wc;
 
-	test();
+	test(); // My own test
+
+	std::cout << "\033[1;34m===== ex00 TESTS END =====\033[0m" << std::endl;
+	std::cout << "\033[1;32mAll ex00 tests passed!\033[0m" << std::endl;
 
 	return 0;
 }
-
-#include <cassert>
-#include <iostream>
 
 void test_animal_basics() {
 	std::cout << "\033[1;34m[TEST] Animal basics...\033[0m" << std::endl;
@@ -142,11 +149,8 @@ void test_polymorphism() {
 }
 
 void test(void) {
-	std::cout << "\033[1;34m===== ex00 TESTS START =====\033[0m" << std::endl;
 	test_animal_basics();
 	test_dog_basics();
 	test_cat_basics();
 	test_polymorphism();
-	std::cout << "\033[1;34m===== ex00 TESTS END =====\033[0m" << std::endl;
-	std::cout << "\033[1;32mAll ex00 tests passed!\033[0m" << std::endl;
 }

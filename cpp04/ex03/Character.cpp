@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Character.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:25:21 by taung             #+#    #+#             */
-/*   Updated: 2025/06/06 18:44:15 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/10 19:57:14 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ Character::Character(void) {
 	for (int i = 0; i < 4; i++) {
 		this->_inventory[i] = NULL;
 	}
-	this->trashCount = 0;
-	this->trash = NULL;
 	std::cout << "Default Character constructor called" << std::endl;
 }
 
@@ -26,14 +24,11 @@ Character::Character(std::string name) {
 	for (int i = 0; i < 4; i++) {
 		this->_inventory[i] = NULL;
 	}
-	this->trashCount = 0;
-	this->trash = NULL;
 	std::cout << "parameterised Character constructor called" << std::endl;
 }
 
 Character::Character(Character &other) {
 	this->_name = other._name;
-	this->trashCount = other.trashCount;
 
 	for (int i = 0; i < 4; i++) {
 		if (other._inventory[i])
@@ -42,37 +37,8 @@ Character::Character(Character &other) {
 			this->_inventory[i] = NULL;
 	}
 
-	if (other.trashCount > 0) {
-		this->trash = new AMateria*[other.trashCount]();
-		for (int i = 0; i < other.trashCount; i++) {
-			this->trash[i] = other.trash[i]->clone();
-		}
-	} else {
-		this->trash = NULL;
-	}
-
 	std::cout << "Copy Character constructor called" << std::endl;
 }
-
-
-// Character&	Character::operator=(const Character &other) {
-// 	if (this != &other) {
-// 		this->_name = other._name;
-// 		this->trashCount = other.trashCount;
-// 		for (int i = 0; i < 4; i++) {
-// 			if (this->_inventory[i])
-// 				delete this->_inventory[i];
-// 			this->_inventory[i] = other._inventory[i]->clone();
-// 		}
-// 		for (int i = 0; i < other.trashCount; i++) {
-// 			if (this->trash[i])
-// 				delete this->trash[i];
-// 			this->trash[i] = other.trash[i]->clone();
-// 		}
-// 	}
-// 	std::cout << "Copy assignment character operator called" << std::endl;
-// 	return (*this);
-// }
 
 Character& Character::operator=(const Character &other) {
 	if (this != &other) {
@@ -88,27 +54,12 @@ Character& Character::operator=(const Character &other) {
 
 		// Deep copy other inventory
 		for (int i = 0; i < 4; i++) {
-			if (other._inventory[i])
+			if (other._inventory[i]) {
 				this->_inventory[i] = other._inventory[i]->clone();
+				this->_inventory[i]->setOwnership(this);
+			}
 			else
 				this->_inventory[i] = NULL;
-		}
-
-		// Clean existing trash
-		for (int i = 0; i < this->trashCount; i++) {
-			delete this->trash[i];
-		}
-		delete[] this->trash;
-
-		// Deep copy other trash
-		this->trashCount = other.trashCount;
-		if (other.trashCount > 0) {
-			this->trash = new AMateria*[other.trashCount]();
-			for (int i = 0; i < other.trashCount; i++) {
-				this->trash[i] = other.trash[i]->clone();
-			}
-		} else {
-			this->trash = NULL;
 		}
 	}
 	std::cout << "Copy assignment character operator called" << std::endl;
@@ -118,20 +69,11 @@ Character& Character::operator=(const Character &other) {
 Character::~Character(void) {
 	// Clean Inventory
 	for (int i = 0; i < 4; i++) {
-		if (foundInTrash(0, _inventory[i])) // Skip if the current materia is in iventory (can only happens when eq->uneq->eq)
-			continue;
-		delete _inventory[i];
-		this->_inventory[i] = NULL;
-	}
-	// Clean Trash
-	for (int i = 0; i < trashCount; i++) {
-		if (trash[i]) {
-			delete trash[i];
-			trash[i] = NULL;
+		if (this->_inventory[i]) {
+			delete this->_inventory[i];
+			this->_inventory[i] = NULL;
 		}
 	}
-	delete []trash;
-	trash = NULL;
 	std::cout << "Character destroyed" << std::endl;
 }
 
@@ -144,29 +86,6 @@ int	Character::availableSot(void) {
 	return (-1);
 }
 
-//Find the unequipped item in the trash from idx
-bool	Character::foundInTrash(int idx, AMateria *m) {
-	while (idx < this->trashCount) {
-		if (trash[idx] == m)
-			return (true);
-		idx++;
-	}
-	return (false);
-}
-
-// Calculate and realloc the trash arrays to store trash inventory items
-void	Character::addToTrash(AMateria**& trash, int& count, AMateria* m) {
-	AMateria** newTrash = new AMateria*[count + 1]();
-	if (foundInTrash(0, m))
-		return;
-	for (int i = 0; i < count; ++i)
-		newTrash[i] = trash[i];
-	newTrash[count] = m;
-	delete[] trash;
-	trash = newTrash;
-	count++;
-}
-
 void	Character::equip(AMateria* m) {
 	int	idx;
 
@@ -175,21 +94,26 @@ void	Character::equip(AMateria* m) {
 		std::cout << "Inventory is full" << std::endl;
 	}
 	else {
-		if (!m)
+		if (!m) {
+			std::cout << "Materia is NULL" << std::endl;
 			return;
+		}
+		if (m->getOwnership() != NULL) {
+			m->getOwnership() == this ? std::cout << m->getType() << " is already equipped" : std::cout << m->getType() + " is already equipped by other character";
+			std::cout << std::endl;
+			return;
+		}
 		this->_inventory[idx] = m;
+		this->_inventory[idx]->setOwnership(this);
 		std::cout << this->_name << " equipped " << this->_inventory[idx]->getType() << std::endl;
 	}
 }
 
 void	Character::unequip(int idx) {
 	if (idx >= 0 && idx <= 3) {
-		if (!foundInTrash(0, this->_inventory[idx]))
-		{
-			addToTrash(this->trash, this->trashCount, this->_inventory[idx]);
 			std::cout << this->_inventory[idx]->getType() << " unequipped from " << this->_name << std::endl;
+			this->_inventory[idx]->setOwnership(NULL);
 			this->_inventory[idx] = NULL;
-		}
 	}
 	else {
 		std::cout << "Inventory slot unavailable!" << std::endl;

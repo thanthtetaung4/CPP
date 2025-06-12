@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:07:48 by taung             #+#    #+#             */
-/*   Updated: 2025/05/19 15:09:12 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/10 18:54:46 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,8 @@ class Character : public ICharacter {
 	private:
 		std::string	_name;
 		AMateria	*_inventory[4];
-		AMateria	**trash;
-		int			trashCount;
 	protected:
 		int	availableSot(void);
-		void	addToTrash(AMateria**& trash, int& count, AMateria* m);
-		bool	foundInTrash(int idx, AMateria* m);
 	public:
 		Character(void);
 		Character(std::string name);

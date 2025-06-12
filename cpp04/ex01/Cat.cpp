@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:36 by taung             #+#    #+#             */
-/*   Updated: 2025/06/01 13:01:12 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/08 17:19:57 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,14 @@ Cat::Cat(const Cat& other) : Animal(other) {
 		this->type = other.type;
 		this->brain = new Brain(*other.brain);
 	}
-		// *this = other;
 }
 
 Cat&	Cat::operator=(const Cat& other) {
-	Brain	*tmp;
 	std::cout << whatAmI() << " Assigment operator called" << std::endl;
 	if (this != &other) {
 		this->type = other.type;
-		tmp = this->brain;
-		delete tmp;;
+		if (this->brain)
+			delete this->brain;
 		this->brain = new Brain(*other.brain);
 	}
 	return (*this);
@@ -56,7 +54,6 @@ Cat::~Cat() {
 
 void	Cat::makeSound(void) const {
 	std::cout << "Meow" << std::endl;
-	// std::cout << "I have an idea " << this->brain << std::endl;
 }
 
 std::string	Cat::think(int index) const {

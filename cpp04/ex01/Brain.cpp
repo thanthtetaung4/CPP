@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:21:02 by taung             #+#    #+#             */
-/*   Updated: 2025/06/01 13:01:31 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/10 16:37:45 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,17 @@ Brain::~Brain(void) {
 }
 
 void		Brain::setIdea(std::string idea, const int index) {
+	if (index > 99 || index < 0) {
+		std::cout << index << " is out of range 😵" << std::endl;
+		return;
+	}
 	this->ideas[index] = idea;
 }
 
 std::string	Brain::getIdea(const int index) const {
+	if (index > 99 || index < 0) {
+		std::cout << index << " is out of range 😵" << std::endl;
+		return NULL;
+	}
 	return (this->ideas[index]);
 }

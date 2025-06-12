@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:53:04 by taung             #+#    #+#             */
-/*   Updated: 2025/06/06 18:53:51 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/08 17:48:25 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	MateriaSource::learnMateria(AMateria* m) {
 			// std::cout << m->getType() << " is clonned as " << materias[i]->getType() << std::endl;
 		}
 	}
+	std::cout << "source is full cannot learn anymore 😟" << std::endl;
 }
 
 /*

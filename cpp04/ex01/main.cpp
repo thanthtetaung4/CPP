@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:47 by taung             #+#    #+#             */
-/*   Updated: 2025/06/06 14:03:31 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/08 18:55:34 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,33 @@
 void	test(void);
 
 int	main(void) {
+
+	std::cout << "\033[1;34m===== ex01 TESTS START =====\033[0m" << std::endl;
+
+	std::cout << "\033[1;34m[TEST] Subject test...\033[0m" << std::endl;
+
 	Animal	*a[10];
 
 	for (int i = 0; i < 5; i++)
-		a[i] = new Dog("Dog");
+	a[i] = new Dog("Dog");
 
 	for (int i = 5; i < 10; i++)
-		a[i] = new Cat("Cat");
+	a[i] = new Cat("Cat");
 
 	for (int i = 0; i < 10; i++)
-		a[i]->makeSound();
+	a[i]->makeSound();
 
 	for (int i = 0; i < 10; i++) {
 		delete a[i];
 		std::cout << i << " is deleted" << std::endl;
 	}
 
+	std::cout << "\033[1;32m[PASS] Subject test ✅\033[0m\n" << std::endl;
+
 	test();
+
+	std::cout << "\033[1;34m===== ex01 TESTS END =====\033[0m" << std::endl;
+	std::cout << "\033[1;32mAll ex01 tests passed!\033[0m" << std::endl;
 }
 
 void	test_animal_basics() {
@@ -61,7 +71,7 @@ void	test_animal_basics() {
 	assert(d.getType() == "creature");
 	std::cout << "\033[1;32mPASS\033[0m: d.getType() == \"creature\" (assign) ✅" << std::endl;
 
-	std::cout << "\033[1;32m[PASS] Animal basics\033[0m\n" << std::endl;
+	std::cout << "\033[1;32m[PASS] Animal basics ✅\033[0m\n" << std::endl;
 }
 
 void	test_brain_basics() {
@@ -75,6 +85,10 @@ void	test_brain_basics() {
 
 	assert(b1.getIdea(1) == "Sleep");
 	std::cout << "\033[1;32mPASS\033[0m: idea[1] == \"Sleep\" ✅" << std::endl;
+
+	// Index out of range test
+	b1.setIdea("Bite Human", 100);
+	std::cout << "\033[1;33mCHECK: Does index out of bound error message shown❔\033[0m" << std::endl;
 
 	// Test copy constructor
 	Brain b2(b1);
@@ -98,7 +112,7 @@ void	test_brain_basics() {
 	assert(b1.getIdea(1) == "Sleep"); // Ensure deep copy
 	std::cout << "\033[1;32mPASS\033[0m: deep copy, b1.idea[1] still == \"Sleep\" after b3 modified ✅" << std::endl;
 
-	std::cout << "\033[1;32m[PASS] Brain basics\033[0m\n" << std::endl;
+	std::cout << "\033[1;32m[PASS] Brain basics ✅\033[0m\n" << std::endl;
 }
 
 void	test_brain_deep_copy_dog() {
@@ -144,7 +158,7 @@ void	test_brain_deep_copy_dog() {
 	assert(d3.think(0) == "Play fetch");
 	std::cout << "\033[1;32mPASS\033[0m: d3.think(0) == \"Play fetch\" ✅" << std::endl;
 
-	std::cout << "\033[1;32m[PASS] Dog deep copy (Brain)\033[0m\n" << std::endl;
+	std::cout << "\033[1;32m[PASS] Dog deep copy (Brain) ✅\033[0m\n" << std::endl;
 }
 
 void	test_brain_deep_copy_cat() {
@@ -190,7 +204,7 @@ void	test_brain_deep_copy_cat() {
 	assert(c3.think(0) == "Play with yarn");
 	std::cout << "\033[1;32mPASS\033[0m: c3.think(0) == \"Play with yarn\" ✅" << std::endl;
 
-	std::cout << "\033[1;32m[PASS] Cat deep copy (Brain)\033[0m\n" << std::endl;
+	std::cout << "\033[1;32m[PASS] Cat deep copy (Brain) ✅\033[0m\n" << std::endl;
 }
 
 void	test_dog_cat_sound_and_type() {
@@ -219,7 +233,7 @@ void	test_dog_cat_sound_and_type() {
 	c2.makeSound();
 	std::cout << "\033[1;33mCHECK: Is it Cat sound❔\033[0m" << std::endl;
 
-	std::cout << "\033[1;32m[PASS] Dog/Cat sound and type\033[0m\n" << std::endl;
+	std::cout << "\033[1;32m[PASS] Dog/Cat sound and type ✅\033[0m\n" << std::endl;
 }
 
 void	test_polymorphism() {
@@ -240,17 +254,14 @@ void	test_polymorphism() {
 
 	delete animals[0];
 	delete animals[1];
-	std::cout << "\033[1;32m[PASS] Polymorphism with Animal*\033[0m\n" << std::endl;
+	std::cout << "\033[1;32m[PASS] Polymorphism with Animal* ✅\033[0m\n" << std::endl;
 }
 
 void	test(void) {
-	std::cout << "\033[1;34m===== ex01 TESTS START =====\033[0m" << std::endl;
 	test_animal_basics();
 	test_brain_basics();
 	test_brain_deep_copy_dog();
 	test_brain_deep_copy_cat();
 	test_dog_cat_sound_and_type();
 	test_polymorphism();
-	std::cout << "\033[1;34m===== ex01 TESTS END =====\033[0m" << std::endl;
-	std::cout << "\033[1;32mAll ex01 tests passed!\033[0m" << std::endl;
 }

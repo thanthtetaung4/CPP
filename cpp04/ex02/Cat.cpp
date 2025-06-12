@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:36 by taung             #+#    #+#             */
-/*   Updated: 2025/06/01 13:15:13 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/08 18:27:00 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ Cat::Cat(const Cat& other) : AAnimal(other) {
 }
 
 Cat&	Cat::operator=(const Cat& other) {
-	Brain	*tmp;
 	std::cout << whatAmI() << " Assigment operator called" << std::endl;
 	if (this != &other) {
 		this->type = other.type;
-		tmp = this->brain;
-		delete tmp;;
+		if (this->brain)
+			delete this->brain;
 		this->brain = new Brain(*other.brain);
 	}
 	return (*this);

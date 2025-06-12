@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:27:42 by taung             #+#    #+#             */
-/*   Updated: 2025/06/01 13:01:42 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/08 17:20:14 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,14 @@ Dog::Dog(const Dog& other) : Animal(other) {
 		this->type = other.type;
 		this->brain = new Brain(*other.brain);
 	}
-		// *this = other;
 }
 
 Dog&	Dog::operator=(const Dog& other) {
-	Brain	*tmp;
-
 	std::cout << whatAmI() << " Assigment operator called" << std::endl;
 	if (this != &other) {
 		this->type = other.type;
-		tmp = this->brain;
-		delete tmp;
+		if (this->brain)
+			delete this->brain;
 		this->brain = new Brain(*other.brain);
 	}
 	return (*this);
@@ -57,7 +54,6 @@ Dog::~Dog() {
 
 void	Dog::makeSound(void) const {
 	std::cout << "Woof" << std::endl;
-	// std::cout << "I have an idea " << this->brain << std::endl;
 }
 
 std::string	Dog::think(int index) const {
