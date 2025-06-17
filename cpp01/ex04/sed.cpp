@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sed.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taung <taung@student.42singapore.fr>       +#+  +:+       +#+        */
+/*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:17:44 by taung             #+#    #+#             */
-/*   Updated: 2025/05/20 21:50:17 by taung            ###   ########.fr       */
+/*   Updated: 2025/06/17 12:32:28 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,18 @@ void	sed(std::string filename, std::string s1, std::string s2) {
 			outFile.open((filename + ".replace").c_str());
 			if (outFile.is_open()) {
 				std::cout << "writing lines from " + filename + " to " + filename + ".replace" << std::endl;
-				do {
-					startAt = line.find(s1);
-					while (startAt != -1)
-					{
-						line.erase(startAt,s1.length());
-						line.insert(startAt, s2);
+				if (s1 != s2) {
+					do {
 						startAt = line.find(s1);
-					}
-					outFile << line << std::endl;
-				} while (getline (inFile, line));
+						while (startAt != -1)
+						{
+							line.erase(startAt,s1.length());
+							line.insert(startAt, s2);
+							startAt = line.find(s1);
+						}
+						outFile << line << std::endl;
+					} while (getline (inFile, line));
+				}
 				inFile.close();
 				outFile.close();
 				std::cout << std::endl;
