@@ -15,7 +15,7 @@
 int	main(void) {
 	Zombie*	z = newZombie("bob");
 	z->announce();
-
+  std::cout << "Hello Zombies" << std::endl;
 	randomChump("alex");
 	delete(z);
 	return (0);
