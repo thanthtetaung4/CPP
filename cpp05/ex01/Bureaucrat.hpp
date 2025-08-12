@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:14:50 by taung             #+#    #+#             */
-/*   Updated: 2025/08/11 21:13:39 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/12 17:09:16 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <iostream>
 # include <exception>
 # include <string>
+# include "Form.hpp"
+
+class Form;
 
 class Bureaucrat {
 	private:
@@ -37,19 +40,22 @@ class Bureaucrat {
 		class GradeTooHighException : public std::exception {
 			public:
 			virtual const char* what() const throw() {
-				return "Grade is too high must be < 150";
+				return "Bureaucrat grade is too high";
 			}
 		};
 		class GradeTooLowException : public std::exception {
 			public:
 			virtual const char* what() const throw() {
-				return "Grade is too low must be > 0";
+				return "Bureaucrat grade is too low";
 			}
 		};
 
 		//Increment & Decrement functions
 		void	gradeUp();
 		void	gradeDown();
+
+		//Sign Func
+		void	signForm(Form& f);
 
 };
 std::ostream& operator<<(std::ostream &os, const Bureaucrat b);
