@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:14:50 by taung             #+#    #+#             */
-/*   Updated: 2025/08/10 20:54:25 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/11 21:13:39 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ class Bureaucrat {
 		int					grade;
 		bool	checkGrade(int grade);
 	public:
-		Bureaucrat();
+		Bureaucrat(void);
 		Bureaucrat(std::string name, int grade);
 		Bureaucrat(const Bureaucrat &other);
-		~Bureaucrat(void);
+		~Bureaucrat();
 		Bureaucrat&	operator=(const Bureaucrat &other);
 
 		// accessors
