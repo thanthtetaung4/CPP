@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 20:21:22 by taung             #+#    #+#             */
-/*   Updated: 2025/08/12 17:42:25 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/12 17:44:43 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Form.hpp"
+# include "AForm.hpp"
 
 AForm::AForm(void) : _name(0), _isSigned(0), _gradeToSign(150), _gradeToExectue(150){}
 
@@ -68,7 +68,7 @@ void	AForm::beSigned(const Bureaucrat& b) {
 	}
 }
 
-std::ostream& operator<<(std::ostream &os, const AForm f) {
+std::ostream& operator<<(std::ostream &os, const AForm& f) {
 	os << "Form " << f.getName() << " \n\t isSigned: " << f.getIsSigned()
 	<< " \n\t\t gradeToSign: " << f.getGradeToSign() << " \n\t\t gradeToExecute: "
 	<< f.getGradeToExectue() << std::endl;

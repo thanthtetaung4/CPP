@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 20:05:31 by taung             #+#    #+#             */
-/*   Updated: 2025/08/12 17:42:25 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/12 17:42:52 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ class AForm {
 
 		//Functions
 		void	beSigned(const Bureaucrat& b);
+		virtual void	execute(const Bureaucrat& b) = 0;
 };
-std::ostream& operator<<(std::ostream &os, const AForm f);
+std::ostream& operator<<(std::ostream &os, const AForm& f);
 
 # endif
