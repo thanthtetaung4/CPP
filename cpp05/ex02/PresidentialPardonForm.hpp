@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/12 17:39:47 by taung             #+#    #+#             */
-/*   Updated: 2025/08/12 22:02:27 by taung            ###   ########.fr       */
+/*   Created: 2025/08/13 00:04:51 by taung             #+#    #+#             */
+/*   Updated: 2025/08/13 00:09:31 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SHRUBBERY_CREATION_FORM
-# define SHRUBBERY_CREATION_FORM
+# ifndef PRESIDENTIAL_PARDON_FORM
+# define PRESIDENTIAL_PARDON_FORM
 
 # include "AForm.hpp"
 
-class ShrubberyCreationForm : public AForm {
+class PresidentialPardonForm : public AForm {
 	public:
-		ShrubberyCreationForm(void);
-		ShrubberyCreationForm(std::string name, bool isSigned, std::string target);
-		ShrubberyCreationForm(const ShrubberyCreationForm& other);
-		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
-		~ShrubberyCreationForm(void);
+		PresidentialPardonForm(void);
+		PresidentialPardonForm(std::string name, bool isSigned, std::string target);
+		PresidentialPardonForm(const PresidentialPardonForm& other);
+		PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
+		~PresidentialPardonForm();
 
 	protected:
-		void	formAction(void) const;
+		void formAction(const Bureaucrat& b);
 };
 
 # endif

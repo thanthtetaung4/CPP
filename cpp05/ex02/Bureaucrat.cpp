@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:14:21 by taung             #+#    #+#             */
-/*   Updated: 2025/08/12 17:42:25 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/13 00:00:46 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ void	Bureaucrat::signForm(AForm& f) {
 	}
 	std::cout << this->name << " signed " << f.getName() << std::endl;
 }
+
+void	Bureaucrat::executeForm(AForm const & form) {
+	form.execute(*this);
+}
+
 
 Bureaucrat::~Bureaucrat(void) {
 	std::cout << "Bureaucrat " << this->name << " killed 💀" << std::endl;

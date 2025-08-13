@@ -5,7 +5,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 # Target executable
 TARGET = bureaucratform
 # Source files
-SRCS = main.cpp Bureaucrat.cpp AForm.cpp
+SRCS = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp
 # Object files
 OBJS = $(SRCS:.cpp=.o)
 

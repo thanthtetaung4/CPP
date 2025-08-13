@@ -6,13 +6,14 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:20:43 by taung             #+#    #+#             */
-/*   Updated: 2025/08/12 17:42:25 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/13 00:24:17 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include <iostream>
 # include "Bureaucrat.hpp"
-# include "Form.hpp"
+# include "AForm.hpp"
+# include "ShrubberyCreationForm.hpp"
 
 int	main(void){
 	try {
@@ -42,22 +43,11 @@ int	main(void){
 	}
 
 	try {
-		AForm	f("form1", false, 1, 1);
-		Bureaucrat b("tayza", 2);
-		b.signForm(f);
-		// std::cout << "isSigned: " << f.getIsSigned() << std::endl;
-		// std::cout << f << std::endl;
+		Bureaucrat b("b", 1);
+		AForm *shr = new ShrubberyCreationForm("sakura", false, "shr");
+		AForm *shr2 = new ShrubberyCreationForm("kura", true, "shr");
+		shr->execute(b);
 	} catch (const std::exception& e) {
-		std::cout << e.what() << std::endl;
-	}
-
-	try {
-		AForm	f("form1", false, 150, 1);
-		Bureaucrat b("tayza", 1);
-		b.signForm(f);
-		// std::cout << "isSigned: " << f.getIsSigned() << std::endl;
-		// std::cout << f << std::endl;
-	} catch (const std::exception& e) {
-		std::cout << e.what() << std::endl;
+		std::cout << e.what() << " not ok" << std::endl;
 	}
 }

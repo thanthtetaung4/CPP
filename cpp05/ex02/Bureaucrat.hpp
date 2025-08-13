@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:14:50 by taung             #+#    #+#             */
-/*   Updated: 2025/08/12 17:44:36 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/12 23:54:39 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ class Bureaucrat {
 		void	gradeUp();
 		void	gradeDown();
 
-		//Sign Func
+		//Form Func
 		void	signForm(AForm& f);
+		void	executeForm(AForm const & form);
 
 };
 std::ostream& operator<<(std::ostream &os, const Bureaucrat b);

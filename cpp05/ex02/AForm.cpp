@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 20:21:22 by taung             #+#    #+#             */
-/*   Updated: 2025/08/12 17:44:43 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/13 00:22:26 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ AForm::AForm(void) : _name(0), _isSigned(0), _gradeToSign(150), _gradeToExectue(
 AForm::AForm(const AForm& other) : _name(other._name), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExectue(other._gradeToExectue) {}
 
 AForm& AForm::operator=(const AForm& other) {
+	std::cout << "hi" << std::endl;
 	if(this != &other) {
 		this->_isSigned = other._isSigned;
 	}
 	return (*this);
 }
 
-AForm::AForm(std::string name, bool isSigned, int gradeToSign, int gradeToExecute)
-	: _name(name), _isSigned(isSigned), _gradeToSign(gradeToSign), _gradeToExectue(gradeToExecute) {
+AForm::AForm(std::string name, bool isSigned, int gradeToSign, int gradeToExecute, std::string target)
+	: _name(name), _isSigned(isSigned), _gradeToSign(gradeToSign), _gradeToExectue(gradeToExecute), _target(target) {
 	if (gradeToSign < 1) {
 		throw AForm::GradeTooLowException();
 	}
@@ -44,20 +45,24 @@ AForm::~AForm() {
 	std::cout << "Form " << this->getName() << " destroyed" << std::endl;
 }
 
-const std::string& AForm::getName(void) const {
+const std::string&	AForm::getName(void) const {
 	return (this->_name);
 }
 
-const bool& AForm::getIsSigned(void) const {
+const bool&	AForm::getIsSigned(void) const {
 	return (this->_isSigned);
 }
 
-const int& AForm::getGradeToSign(void) const {
+const int&	AForm::getGradeToSign(void) const {
 	return (this->_gradeToSign);
 }
 
-const int& AForm::getGradeToExectue(void) const {
+const int&	AForm::getGradeToExectue(void) const {
 	return (this->_gradeToExectue);
+}
+
+const std::string&	AForm::getTarget(void) const {
+	return (this->_target);
 }
 
 void	AForm::beSigned(const Bureaucrat& b) {
@@ -66,6 +71,14 @@ void	AForm::beSigned(const Bureaucrat& b) {
 	} else {
 		this->_isSigned = true;
 	}
+}
+
+void	AForm::execute(const Bureaucrat& b) const {
+	if (b.getGrade() > this->getGradeToExectue()) {
+		throw AForm::GradeTooLowException();
+		return;
+	}
+	this->formAction();
 }
 
 std::ostream& operator<<(std::ostream &os, const AForm& f) {

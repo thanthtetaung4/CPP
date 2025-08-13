@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 20:05:31 by taung             #+#    #+#             */
-/*   Updated: 2025/08/12 17:42:52 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/13 00:16:12 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ class AForm {
 		bool				_isSigned;
 		const int			_gradeToSign;
 		const int			_gradeToExectue;
+		const std::string	_target;
 
 	public:
 		AForm(void);
-		AForm(std::string name, bool isSigned, int gradeToSign, int gradeToExecute);
+		AForm(std::string name, bool isSigned, int gradeToSign, int gradeToExecute, std::string target);
 		AForm(const AForm& other);
 		AForm& operator=(const AForm& other);
 		~AForm();
@@ -47,14 +48,20 @@ class AForm {
 		};
 
 		//Accessors
+		// Setters
 		const std::string&	getName(void) const;
 		const bool&			getIsSigned(void) const;
 		const int&			getGradeToSign(void) const;
 		const int&			getGradeToExectue(void) const;
+		const std::string&	getTarget(void) const;
+		// Getters
+		void				setIsSigned(bool isSigned);
 
 		//Functions
 		void	beSigned(const Bureaucrat& b);
-		virtual void	execute(const Bureaucrat& b) = 0;
+		void	execute(const Bureaucrat& b) const;
+	protected:
+		virtual void	formAction() const = 0;
 };
 std::ostream& operator<<(std::ostream &os, const AForm& f);
 
