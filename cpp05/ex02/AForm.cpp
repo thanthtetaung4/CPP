@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 20:21:22 by taung             #+#    #+#             */
-/*   Updated: 2025/08/13 00:22:26 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/17 21:04:48 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ AForm::AForm(void) : _name(0), _isSigned(0), _gradeToSign(150), _gradeToExectue(
 AForm::AForm(const AForm& other) : _name(other._name), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExectue(other._gradeToExectue) {}
 
 AForm& AForm::operator=(const AForm& other) {
-	std::cout << "hi" << std::endl;
 	if(this != &other) {
 		this->_isSigned = other._isSigned;
 	}
@@ -78,7 +77,8 @@ void	AForm::execute(const Bureaucrat& b) const {
 		throw AForm::GradeTooLowException();
 		return;
 	}
-	this->formAction();
+	this->formAction_();
+	std::cout << std::string(" by " + this->_name + ".") << std::endl;
 }
 
 std::ostream& operator<<(std::ostream &os, const AForm& f) {

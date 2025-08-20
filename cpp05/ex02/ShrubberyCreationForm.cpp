@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 17:39:47 by taung             #+#    #+#             */
-/*   Updated: 2025/08/13 00:19:25 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/19 18:33:12 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,14 @@ ShrubberyCreationForm::ShrubberyCreationForm(void) : AForm(0,0,145,137,0) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name, bool isSigned, std::string target)
-	: AForm(name, isSigned, 145, 137, target) {}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
+	: AForm("ShrubberyCreationForm", false, 145, 137, target) {}
 
-ShrubberyCreationForm::~ShrubberyCreationForm(void)
-{
+ShrubberyCreationForm::~ShrubberyCreationForm(void) {
 	std::cout << "ShrubberyCreationForm deleted" << std::endl;
 }
 
-ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
-{
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other){
 	if (this != &other) {
 		std::cout << "AForm::operator=(other); called" << std::endl;
 		AForm::operator=(other);
@@ -34,7 +32,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return *this;
 }
 
-void ShrubberyCreationForm::formAction() const
+void ShrubberyCreationForm::formAction_() const
 {
 	std::ofstream MyFile((this->getTarget() + "_shrubbery").c_str());
 	if (!MyFile)
@@ -75,4 +73,6 @@ void ShrubberyCreationForm::formAction() const
 	MyFile << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠃⠇⠀⠀⠀⡠⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⢯⣄⠼⠣⠴⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << std::endl;
 	MyFile << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡔⠡⠃⠀⠀⠀⡠⠞⠀" << std::endl;
 	MyFile.close();
+
+	std::cout << "A beautiful tree has been planted";
 }

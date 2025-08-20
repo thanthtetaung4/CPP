@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:14:50 by taung             #+#    #+#             */
-/*   Updated: 2025/08/10 20:54:25 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/17 20:00:12 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 class Bureaucrat {
 	private:
-		const std::string	name;
-		int					grade;
-		bool	checkGrade(int grade);
+		const std::string	_name;
+		int					_grade;
+		bool	_checkGrade(int grade);
 	public:
 		Bureaucrat();
 		Bureaucrat(std::string name, int grade);

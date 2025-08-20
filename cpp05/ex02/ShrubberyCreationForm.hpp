@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 17:39:47 by taung             #+#    #+#             */
-/*   Updated: 2025/08/12 22:02:27 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/19 18:33:10 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 class ShrubberyCreationForm : public AForm {
 	public:
 		ShrubberyCreationForm(void);
-		ShrubberyCreationForm(std::string name, bool isSigned, std::string target);
+		ShrubberyCreationForm(std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm& other);
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
 		~ShrubberyCreationForm(void);
 
 	protected:
-		void	formAction(void) const;
+		void	formAction_(void) const;
 };
 
 # endif

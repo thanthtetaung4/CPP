@@ -6,56 +6,56 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:14:21 by taung             #+#    #+#             */
-/*   Updated: 2025/08/10 20:54:01 by taung            ###   ########.fr       */
+/*   Updated: 2025/08/18 19:07:41 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(void) : name("unknown"), grade(1) {}
+Bureaucrat::Bureaucrat(void) : _name("unknown"), _grade(1) {}
 
-Bureaucrat::Bureaucrat(std::string name, int grade) : name(name) {
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
 	if (grade < 1)
 		throw Bureaucrat::GradeTooLowException();
 	else if (grade > 150)
 		throw Bureaucrat::GradeTooHighException();
 	else
-		this->grade = grade;
+		this->_grade = grade;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) {
 	if (this != &other) {
-		this->grade = other.grade;
+		this->_grade = other._grade;
 	}
 }
 
 Bureaucrat&	Bureaucrat::operator=(const Bureaucrat &other) {
 	if (this != &other) {
-		this->grade = other.grade;
+		this->_grade = other._grade;
 	}
 	return (*this);
 }
 
 const std::string&	Bureaucrat::getName(void) const {
-	return (this->name);
+	return (this->_name);
 }
 
 const int&			Bureaucrat::getGrade(void) const {
-	return (this->grade);
+	return (this->_grade);
 }
 
 void	Bureaucrat::gradeUp() {
-	if (this->grade == 150)
+	if (this->_grade == 150)
 		throw (Bureaucrat::GradeTooHighException());
 	else
-		this->grade++;
+		this->_grade++;
 }
 
 void	Bureaucrat::gradeDown() {
-	if (this->grade == 1)
+	if (this->_grade == 1)
 		throw (Bureaucrat::GradeTooLowException());
 	else
-		this->grade--;
+		this->_grade--;
 }
 
 std::ostream& operator<<(std::ostream &os, const Bureaucrat b) {
@@ -63,4 +63,6 @@ std::ostream& operator<<(std::ostream &os, const Bureaucrat b) {
 	return (os);
 }
 
-Bureaucrat::~Bureaucrat(void) {}
+Bureaucrat::~Bureaucrat(void) {
+	std::cout << this->getName() << " is killed" << std::endl;
+}
