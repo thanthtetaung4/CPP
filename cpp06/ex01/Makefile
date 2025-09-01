@@ -3,10 +3,10 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Target executable
-TARGET = scalar
+TARGET = serialize
 
 # Source files
-SRCS = main.cpp ScalarConverter.cpp
+SRCS = main.cpp Data.cpp Serializer.cpp
 # Object files
 OBJS = $(SRCS:.cpp=.o)
 
