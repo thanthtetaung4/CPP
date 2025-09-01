@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:20:43 by taung             #+#    #+#             */
-/*   Updated: 2025/08/26 21:41:01 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/01 17:17:06 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "ShrubberyCreationForm.hpp"
 # include "PresidentialPardonForm.hpp"
 # include "RobotomyRequestForm.hpp"
-# include "Intern.hpp"
 
 int	main(void){
 	try {
@@ -70,21 +69,9 @@ int	main(void){
 		AForm *shr = new RobotomyRequestForm("aoo");
 		AForm *shr2 = new RobotomyRequestForm("aoo");
 		*shr2 = *shr;
+		b.signForm(*shr);
+		b.signForm(*shr);
 		shr->execute(b);
-	} catch (const std::exception& e) {
-		std::cout << e.what() << " not ok" << std::endl;
-	}
-
-	try {
-		Bureaucrat b("b", 1);
-		std::string	forms[4] = {"robotomy request", "shrubbery creation", "presidential pardon", "random form"};
-		AForm*	validForms[4] = {NULL, NULL, NULL, NULL};
-		Intern	i;
-		for (int j = 0; j < 3; j++) {
-			validForms[j] = i.makeForm(forms[j], "random target");
-			if (validForms[j])
-				validForms[j]->execute(b);
-		}
 	} catch (const std::exception& e) {
 		std::cout << e.what() << " not ok" << std::endl;
 	}

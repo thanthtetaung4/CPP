@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:20:43 by taung             #+#    #+#             */
-/*   Updated: 2025/08/26 18:27:37 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/01 17:04:27 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,16 @@ int	main(void){
 		AForm *shr = new RobotomyRequestForm("aoo");
 		AForm *shr2 = new RobotomyRequestForm("aoo");
 		*shr2 = *shr;
+		shr->execute(b);
+	} catch (const std::exception& e) {
+		std::cout << e.what() << " not ok" << std::endl;
+	}
+
+	try {
+		Bureaucrat b("b", 1);
+		AForm *shr = new RobotomyRequestForm("aoo");
+		b.signForm(*shr);
+		b.signForm(*shr);
 		shr->execute(b);
 	} catch (const std::exception& e) {
 		std::cout << e.what() << " not ok" << std::endl;

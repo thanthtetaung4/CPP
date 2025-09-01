@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:14:50 by taung             #+#    #+#             */
-/*   Updated: 2025/08/17 20:00:12 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/01 16:49:22 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,23 @@ class Bureaucrat {
 		const int&			getGrade(void) const;
 
 		// Exceptions
-		class GradeTooHighException : public std::exception {
+		class	GradeTooHighException : public std::exception {
 			public:
 			virtual const char* what() const throw() {
-				return "Bureaucrat grade is too high";
+				return ("Bureaucrat grade is too high");
 			}
 		};
-		class GradeTooLowException : public std::exception {
+		class	GradeTooLowException : public std::exception {
 			public:
 			virtual const char* what() const throw() {
-				return "Bureaucrat grade is too low";
+				return ("Bureaucrat grade is too low");
 			}
+		};
+		class	FormIsSignedException : public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return ("Form is already signed");
+				}
 		};
 
 		//Increment & Decrement functions

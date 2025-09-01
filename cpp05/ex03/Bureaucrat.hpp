@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:14:50 by taung             #+#    #+#             */
-/*   Updated: 2025/08/17 20:00:13 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/01 17:03:15 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ class Bureaucrat {
 			virtual const char* what() const throw() {
 				return "Bureaucrat grade is too low";
 			}
+		};
+		class	FormIsSignedException : public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return ("Form is already signed");
+				}
 		};
 
 		//Increment & Decrement functions

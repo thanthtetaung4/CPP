@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:14:21 by taung             #+#    #+#             */
-/*   Updated: 2025/08/17 20:00:07 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/01 17:14:26 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ std::ostream& operator<<(std::ostream &os, const Bureaucrat b) {
 }
 
 void	Bureaucrat::signForm(AForm& f) {
+	if (f.getIsSigned())
+		throw Bureaucrat::FormIsSignedException();
 	try {
 		f.beSigned(*this);
 	} catch (const std::exception& e) {

@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 20:05:31 by taung             #+#    #+#             */
-/*   Updated: 2025/08/18 19:06:21 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/01 17:10:35 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ class AForm {
 			virtual const char* what() const throw() {
 				return "Form grade is too low";
 			}
+		};
+		class	FormIsSignedException : public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return ("Form is already signed");
+				}
 		};
 
 		//Accessors
