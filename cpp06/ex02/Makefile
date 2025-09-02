@@ -3,10 +3,10 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Target executable
-TARGET = scalar
+TARGET = ABC
 
 # Source files
-SRCS = main.cpp ScalarConverter.cpp
+SRCS = main.cpp Base.cpp A.cpp B.cpp C.cpp
 # Object files
 OBJS = $(SRCS:.cpp=.o)
 

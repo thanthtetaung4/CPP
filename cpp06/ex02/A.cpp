@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   A.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 12:05:46 by taung             #+#    #+#             */
-/*   Updated: 2025/09/02 00:27:12 by taung            ###   ########.fr       */
+/*   Created: 2025/09/02 10:23:12 by taung             #+#    #+#             */
+/*   Updated: 2025/09/02 12:08:31 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include "A.hpp"
 # include <iostream>
-# include "ScalarConverter.hpp"
 
-int main(int ac, char **av) {
+A::A() {}
 
-	std::cout << std::numeric_limits<double>::max() << std::endl;
-	if (ac < 2)
-		std::cerr << "usage: ./scalar <input> | <inputs>" << std::endl;
-	for (int i = 1; i < ac; i++) {
-		ScalarConverter::convert(std::string(av[i]));
-		i != ac ? std::cout << "==========================================" << std::endl : std::cout << std::endl;
-	}
+void	A::print(void) {
+	std::cout << "This is A" << std::endl;
 }
