@@ -5,20 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 12:05:46 by taung             #+#    #+#             */
-/*   Updated: 2025/09/02 15:07:29 by taung            ###   ########.fr       */
+/*   Created: 2025/09/04 14:35:52 by taung             #+#    #+#             */
+/*   Updated: 2025/09/04 16:58:48 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <iostream>
-# include "ScalarConverter.hpp"
+# include "Array.hpp"
 
-int main(int ac, char **av) {
-
-	if (ac < 2)
-		std::cerr << "usage: ./scalar <input> | <inputs>" << std::endl;
-	for (int i = 1; i < ac; i++) {
-		ScalarConverter::convert(std::string(av[i]));
-		i != ac ? std::cout << "==========================================" << std::endl : std::cout << std::endl;
+int	main() {
+	Array<int> a(5);
+	for (size_t i = 0; i < a.size(); i++) {
+		a[i] = i;
 	}
+	std::cout << a << std::endl;
 }

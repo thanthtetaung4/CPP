@@ -5,20 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 12:05:46 by taung             #+#    #+#             */
-/*   Updated: 2025/09/02 15:07:29 by taung            ###   ########.fr       */
+/*   Created: 2025/09/02 17:07:40 by taung             #+#    #+#             */
+/*   Updated: 2025/09/04 13:59:49 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include <iostream>
-# include "ScalarConverter.hpp"
 
-int main(int ac, char **av) {
+# include "iter.hpp"
 
-	if (ac < 2)
-		std::cerr << "usage: ./scalar <input> | <inputs>" << std::endl;
-	for (int i = 1; i < ac; i++) {
-		ScalarConverter::convert(std::string(av[i]));
-		i != ac ? std::cout << "==========================================" << std::endl : std::cout << std::endl;
-	}
+template <typename data>
+void	print(const data d) {
+	std::cout << d << std::endl;
+}
+
+int	add(int &i) {
+	i++;
+	return (1);
+}
+
+int	main() {
+	int	arr[5] = {1, 2, 3, 4, 5};
+	char	carr[5] = {'a', 'b', 'c', 'd', 'e'};
+
+	iter(arr, 5, add);
+	iter(arr, 5, print<int>);
+	iter(carr, 5,print<char>);
 }

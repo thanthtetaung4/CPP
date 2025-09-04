@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:02:22 by taung             #+#    #+#             */
-/*   Updated: 2025/08/29 17:44:12 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/02 14:41:21 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int: 42
 float: 42.0f
 double: 42.0
 */
+
+# define FLOAT_MIN_POSITIVE 1.17549435e-38f
+# define DOUBLE_MIN_POSITIVE 2.2250738585072014e-308
 
 class ScalarConverter {
 	private:

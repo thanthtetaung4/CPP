@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 12:06:31 by taung             #+#    #+#             */
-/*   Updated: 2025/09/01 21:07:53 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/02 15:17:21 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ bool	isValidStr(std::string value) {
 	if (value.length() > 1)
 	{
 		for (size_t i = 0; ((i < value.length()) && (dotCount < 2) && (fCount < 2)); i++) {
+			if (i == 0 && (value[i] == '-' || value[i] == '+'))
+				continue;
 			if (!std::isdigit(value[i])) {
 				if (value[i] == 'f')
 					fCount++;
@@ -77,24 +79,21 @@ void	convertInt(double dval) {
 }
 
 void	convertFloat(double dval) {
-	if (dval > std::numeric_limits<float>::max() || dval < std::numeric_limits<float>::min()) {
+	if (dval > std::numeric_limits<float>::max() || dval < -std::numeric_limits<float>::max()) {
 		std::cout << "float: nanf" << std::endl;
 		return ;
 	}
 	float tmp = 0;
 	tmp = static_cast<float>(dval);
-	if (fmod(tmp, static_cast<int>(tmp)) == 0)
-		std::cout << std::fixed << std::setprecision(1) << "float: " << tmp << "f" << std::endl;
-	else
-		std::cout << "float: " << tmp << "f" << std::endl;
+	std::cout << std::fixed << std::setprecision(2) << "float: " << round(tmp * 100.0) / 100.0 << "f" << std::endl;
 }
 
 void	convertDouble(double dval) {
-	if (dval > std::numeric_limits<double>::max() || dval < std::numeric_limits<double>::min()) {
+	if (dval > std::numeric_limits<double>::max() || dval < -std::numeric_limits<double>::max()) {
 		std::cout << "double: nan" << std::endl;
 		return ;
 	}
-	std::cout << "double: " << dval << std::endl;
+	std::cout << "double: " << round(dval * 100.0) / 100.0 << std::endl;
 }
 
 bool	isInf(std::string value) {
