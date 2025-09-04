@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:35:52 by taung             #+#    #+#             */
-/*   Updated: 2025/09/04 16:58:48 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/04 19:35:54 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,10 @@ int	main() {
 		a[i] = i;
 	}
 	std::cout << a << std::endl;
+
+	Array<std::string> b(5);
+	for (size_t i = 0; i < a.size(); i++) {
+		b[i] = "a dog";
+	}
+	std::cout << b << std::endl;
 }

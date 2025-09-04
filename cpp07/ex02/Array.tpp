@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:35:48 by taung             #+#    #+#             */
-/*   Updated: 2025/09/04 16:59:11 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/04 19:42:55 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ Array<T>::Array(void) : _array(NULL), _size(0) {}
 
 template<typename T>
 Array<T>::Array(unsigned int n) : _size(n) {
-	this->_array = new T(this->_size);
+	this->_array = new T[this->_size];
 }
 
 template<typename T>
