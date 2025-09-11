@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:35:05 by taung             #+#    #+#             */
-/*   Updated: 2025/09/10 21:43:48 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/11 23:19:50 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class Span {
 		~Span();
 
 		void	addNumber(int i);
+		void	addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 		int		shortestSpan(void);
 		int		longestSpan(void);
 		const std::vector<int>&	getContainer(void) const;
