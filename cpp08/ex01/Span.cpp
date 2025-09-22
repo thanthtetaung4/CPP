@@ -21,13 +21,13 @@ Span::Span(int N) : _N(N) {
 		throw Span::IvalidN();
 }
 
-Span::Span(Span& other) {
+Span::Span(const Span& other) {
 	*this = other;
 }
 
 Span::~Span() {}
 
-Span&	Span::operator=(Span& other) {
+Span&	Span::operator=(const Span& other) {
 	if (this != &other) {
 		this->_N = other._N;
 		this->_container.clear();
@@ -45,18 +45,12 @@ void	Span::addNumber(int i) {
 	}
 }
 
-void	Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
-	for (std::vector<int>::iterator it = begin; it != end; ++it) {
-		addNumber(*it);
-	}
-}
-
-
 int		Span::shortestSpan(void) {
 	int	ss = 0;
 
-	for (size_t i = 0; i < (size_t)this->_container.size() - 1; i++) {
-		if (ss < (this->_container[i + 1] - this->_container[i]))
+	ss = this->_container[1] - this->_container[0];
+	for (size_t i = 1; i < (size_t)this->_container.size() - 1; i++) {
+		if (ss > (this->_container[i + 1] - this->_container[i]))
 			ss = this->_container[i + 1] - this->_container[i];
 	}
 
@@ -64,7 +58,7 @@ int		Span::shortestSpan(void) {
 }
 
 int		Span::longestSpan(void) {
-	return (*this->_container.end() - *this->_container.begin());
+	return (*(this->_container.end() - 1) - *this->_container.begin());
 }
 
 std::ostream&	operator<<(std::ostream& os, Span sp) {

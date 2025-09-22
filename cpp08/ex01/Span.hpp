@@ -25,12 +25,17 @@ class Span {
 	public:
 		Span(void);
 		Span(int N);
-		Span(Span& other);
-		Span&	operator=(Span& other);
+		Span(const Span& other);
+		Span&	operator=(const Span& other);
 		~Span();
 
 		void	addNumber(int i);
-		void	addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);
+		template<typename Iterator>
+		void	addNumber(Iterator begin, Iterator end) {
+			for (Iterator it = begin; it != end; ++it) {
+				addNumber(*it);
+			}
+		}
 		int		shortestSpan(void);
 		int		longestSpan(void);
 		const std::vector<int>&	getContainer(void) const;

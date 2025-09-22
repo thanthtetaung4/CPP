@@ -5,42 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/10 16:35:11 by taung             #+#    #+#             */
-/*   Updated: 2025/09/10 21:38:51 by taung            ###   ########.fr       */
+/*   Created: 2025/09/22 17:01:44 by taung             #+#    #+#             */
+/*   Updated: 2025/09/22 18:08:25 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include "MutantStack.hpp"
 # include <iostream>
 # include <vector>
-# include <array>
-# include "Span.hpp"
 
-// Subject's main
 int	main(void) {
+	MutantStack<int>	mt;
+	mt.push(0);
+	mt.push(1);
 
-	{
-		Span	sp = Span(5);
+	std::cout << mt << std::endl;
 
-		sp.addNumber(6);
-		sp.addNumber(3);
-		sp.addNumber(17);
-		sp.addNumber(9);
-		sp.addNumber(11);
+	MutantStack<char>	mt2;
+	mt2.push('3');
+	mt2.push('4');
+	mt2.push('1');
+	mt2.push('8');
 
-		std::cout << sp << std::endl;
-		std::cout << sp.shortestSpan() << std::endl;
-		std::cout << sp.longestSpan() << std::endl;
-	}
+	MutantStack<char>::iterator	iter2 = mt2.begin();
 
-	{
-		std::array<int, 10>		arr = {10, 15, 14 ,12, 1, 18, 2, 57, 16, 0};
-		Span	sp2 = Span(10);
+	iter2 += 2;
 
-		sp2.addNumber(arr.begin(), arr.end());
-		std::cout << sp2 << std::endl;
-		std::cout << sp2.shortestSpan() << std::endl;
-		std::cout << sp2.longestSpan() << std::endl;
-	}
+	std::cout << *(iter2) << std::endl;
 
-	return 0;
+	std::cout << mt2 << std::endl;
 }
