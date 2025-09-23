@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 00:44:14 by taung             #+#    #+#             */
-/*   Updated: 2025/09/22 17:51:13 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/23 14:11:03 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,10 @@
 template<typename T, typename Container = std::deque<T> >
 class MutantStack : public std::stack<T, Container> {
 public:
-	// In C++98, you must explicitly declare constructors if needed
-	MutantStack() : std::stack<T, Container>() {}
-	MutantStack(const MutantStack &other) : std::stack<T, Container>(other) {}
-	MutantStack &operator=(const MutantStack &other) {
-		std::stack<T, Container>::operator=(other);
-		return *this;
-	}
-	~MutantStack() {}
+	MutantStack();
+	MutantStack(const MutantStack &other);
+	MutantStack &operator=(const MutantStack &other);
+	~MutantStack();
 
 	typedef typename Container::iterator iterator;
 	typedef typename Container::const_iterator const_iterator;
@@ -39,17 +35,17 @@ public:
 	typedef typename Container::const_reverse_iterator const_reverse_iterator;
 
 	// Iterator access
-	iterator begin() { return this->c.begin(); }
-	iterator end() { return this->c.end(); }
+	iterator begin();
+	iterator end();
 
-	const_iterator begin() const { return this->c.begin(); }
-	const_iterator end() const { return this->c.end(); }
+	const_iterator begin() const;
+	const_iterator end() const;
 
-	reverse_iterator rbegin() { return this->c.rbegin(); }
-	reverse_iterator rend() { return this->c.rend(); }
+	reverse_iterator rbegin();
+	reverse_iterator rend();
 
-	const_reverse_iterator rbegin() const { return this->c.rbegin(); }
-	const_reverse_iterator rend() const { return this->c.rend(); }
+	const_reverse_iterator rbegin() const;
+	const_reverse_iterator rend() const;
 };
 template <typename T, typename Container>
 std::ostream& operator<<(std::ostream& os, const MutantStack<T, Container>& mt) {
@@ -59,5 +55,7 @@ std::ostream& operator<<(std::ostream& os, const MutantStack<T, Container>& mt) 
 	}
 	return os;
 }
+
+# include "MutantStack.tpp"
 
 # endif

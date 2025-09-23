@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:35:08 by taung             #+#    #+#             */
-/*   Updated: 2025/09/11 23:24:17 by taung            ###   ########.fr       */
+/*   Updated: 2025/09/23 16:46:17 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ Span::~Span() {}
 Span&	Span::operator=(const Span& other) {
 	if (this != &other) {
 		this->_N = other._N;
-		this->_container.clear();
-		std::copy(other._container.begin(), other._container.end(), std::back_inserter(this->_container));
+		this->_container = other._container;
 	}
 	return (*this);
 }

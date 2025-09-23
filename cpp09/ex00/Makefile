@@ -3,10 +3,10 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror #-std=c++98
 
 # Target executable
-TARGET = ex01
+TARGET = btc
 
 # Source files
-SRCS = main.cpp Span.cpp
+SRCS = main.cpp BitcoinExchange.cpp
 # Object files
 OBJS = $(SRCS:.cpp=.o)
 
