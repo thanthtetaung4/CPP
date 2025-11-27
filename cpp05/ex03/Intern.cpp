@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:08:25 by taung             #+#    #+#             */
-/*   Updated: 2025/08/26 21:39:19 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/26 15:45:31 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,13 @@ int	getFromNumber(std::string formName) {
 AForm *Intern::makeForm(std::string formName, std::string targetName) {
 	switch (getFromNumber(formName)) {
 		case 0:
+			std::cout << "Intern creates " << formName << std::endl;
 			return ((AForm*)new RobotomyRequestForm(targetName));
 		case 1:
+			std::cout << "Intern creates " << formName << std::endl;
 			return ((AForm*)new ShrubberyCreationForm(targetName));
 		case 2:
+			std::cout << "Intern creates " << formName << std::endl;
 			return ((AForm*)new PresidentialPardonForm(targetName));
 		default:
 			std::cout << "non existantial form" << std::endl;

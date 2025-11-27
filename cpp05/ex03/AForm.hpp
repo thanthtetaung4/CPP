@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 20:05:31 by taung             #+#    #+#             */
-/*   Updated: 2025/09/01 17:10:35 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/26 17:25:07 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,23 @@ class AForm {
 
 	public:
 		AForm(void);
-		AForm(std::string name, bool isSigned, int gradeToSign, int gradeToExecute, std::string target);
+		AForm(std::string name, int gradeToSign, int gradeToExecute, std::string target);
 		AForm(const AForm& other);
 		AForm& operator=(const AForm& other);
-		~AForm();
+		virtual ~AForm();
 
 		//Exception
 		class GradeTooHighException : public std::exception { //will this be ever used??????
 			public:
-			virtual const char* what() const throw() {
-				return "Form grade is too high";
-			}
+			virtual const char* what() const throw();
 		};
 		class GradeTooLowException : public std::exception {
 			public:
-			virtual const char* what() const throw() {
-				return "Form grade is too low";
-			}
+			virtual const char* what() const throw();
 		};
 		class	FormIsSignedException : public std::exception {
 			public:
-				virtual const char* what() const throw() {
-					return ("Form is already signed");
-				}
+				virtual const char* what() const throw();
 		};
 
 		//Accessors

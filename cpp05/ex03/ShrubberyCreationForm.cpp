@@ -6,19 +6,19 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 17:39:47 by taung             #+#    #+#             */
-/*   Updated: 2025/08/19 18:33:12 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/26 15:44:10 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(void) : AForm(0,0,145,137,0) {}
+ShrubberyCreationForm::ShrubberyCreationForm(void) : AForm(0,145,137,0) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
-	: AForm("ShrubberyCreationForm", false, 145, 137, target) {}
+	: AForm("ShrubberyCreationForm", 145, 137, target) {}
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {
 	std::cout << "ShrubberyCreationForm deleted" << std::endl;

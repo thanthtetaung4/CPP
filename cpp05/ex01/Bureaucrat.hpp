@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:14:50 by taung             #+#    #+#             */
-/*   Updated: 2025/09/01 16:49:22 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/26 15:28:17 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <string>
 # include "Form.hpp"
 
-class AForm;
+class Form;
 
 class Bureaucrat {
 	private:
@@ -39,21 +39,19 @@ class Bureaucrat {
 		// Exceptions
 		class	GradeTooHighException : public std::exception {
 			public:
-			virtual const char* what() const throw() {
-				return ("Bureaucrat grade is too high");
-			}
+				virtual const char* what() const throw();
 		};
 		class	GradeTooLowException : public std::exception {
 			public:
-			virtual const char* what() const throw() {
-				return ("Bureaucrat grade is too low");
-			}
+				virtual const char* what() const throw();
 		};
 		class	FormIsSignedException : public std::exception {
 			public:
-				virtual const char* what() const throw() {
-					return ("Form is already signed");
-				}
+				virtual const char* what() const throw();
+		};
+		class	CannotCreateBureaucrat : public std::exception {
+			public:
+				virtual const char* what() const throw();
 		};
 
 		//Increment & Decrement functions
@@ -61,9 +59,9 @@ class Bureaucrat {
 		void	gradeDown();
 
 		//Sign Func
-		void	signForm(AForm& f);
+		void	signForm(Form& f);
 
 };
-std::ostream& operator<<(std::ostream &os, const Bureaucrat b);
+std::ostream& operator<<(std::ostream &os, const Bureaucrat& b);
 
 # endif

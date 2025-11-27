@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 20:05:31 by taung             #+#    #+#             */
-/*   Updated: 2025/08/12 17:42:25 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/26 15:23:29 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 class Bureaucrat;
 
-class AForm {
+class Form {
 	private:
 		const std::string	_name;
 		bool				_isSigned;
@@ -26,24 +26,20 @@ class AForm {
 		const int			_gradeToExectue;
 
 	public:
-		AForm(void);
-		AForm(std::string name, bool isSigned, int gradeToSign, int gradeToExecute);
-		AForm(const AForm& other);
-		AForm& operator=(const AForm& other);
-		~AForm();
+		Form(void);
+		Form(std::string name, int gradeToSign, int gradeToExecute);
+		Form(const Form& other);
+		Form& operator=(const Form& other);
+		~Form();
 
 		//Exception
-		class GradeTooHighException : public std::exception { //will this be ever used??????
+		class GradeTooHighException : public std::exception {
 			public:
-			virtual const char* what() const throw() {
-				return "Form grade is too high";
-			}
+			virtual const char* what() const throw();
 		};
 		class GradeTooLowException : public std::exception {
 			public:
-			virtual const char* what() const throw() {
-				return "Form grade is too low";
-			}
+			virtual const char* what() const throw();
 		};
 
 		//Accessors
@@ -55,6 +51,6 @@ class AForm {
 		//Functions
 		void	beSigned(const Bureaucrat& b);
 };
-std::ostream& operator<<(std::ostream &os, const AForm f);
+std::ostream& operator<<(std::ostream &os, const Form f);
 
 # endif

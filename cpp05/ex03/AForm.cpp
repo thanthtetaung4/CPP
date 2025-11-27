@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 20:21:22 by taung             #+#    #+#             */
-/*   Updated: 2025/08/17 21:04:48 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/26 15:55:50 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ AForm& AForm::operator=(const AForm& other) {
 	return (*this);
 }
 
-AForm::AForm(std::string name, bool isSigned, int gradeToSign, int gradeToExecute, std::string target)
-	: _name(name), _isSigned(isSigned), _gradeToSign(gradeToSign), _gradeToExectue(gradeToExecute), _target(target) {
+AForm::AForm(std::string name, int gradeToSign, int gradeToExecute, std::string target)
+	: _name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExectue(gradeToExecute), _target(target) {
 	if (gradeToSign < 1) {
 		throw AForm::GradeTooLowException();
 	}
@@ -42,6 +42,18 @@ AForm::AForm(std::string name, bool isSigned, int gradeToSign, int gradeToExecut
 
 AForm::~AForm() {
 	std::cout << "Form " << this->getName() << " destroyed" << std::endl;
+}
+
+const char* AForm::GradeTooHighException::what() const throw() {
+	return ("Form grade is too high");
+}
+
+const char* AForm::GradeTooLowException::what() const throw() {
+	return ("Form grade is too low");
+}
+
+const char* AForm::FormIsSignedException::what() const throw() {
+	return ("Form is already signed");
 }
 
 const std::string&	AForm::getName(void) const {
@@ -83,7 +95,7 @@ void	AForm::execute(const Bureaucrat& b) const {
 
 std::ostream& operator<<(std::ostream &os, const AForm& f) {
 	os << "Form " << f.getName() << " \n\t isSigned: " << f.getIsSigned()
-	<< " \n\t\t gradeToSign: " << f.getGradeToSign() << " \n\t\t gradeToExecute: "
+	<< " \n\t gradeToSign: " << f.getGradeToSign() << " \n\t gradeToExecute: "
 	<< f.getGradeToExectue() << std::endl;
 	return (os);
 }

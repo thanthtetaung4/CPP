@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:20:43 by taung             #+#    #+#             */
-/*   Updated: 2025/08/10 20:55:32 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/26 15:19:50 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,33 @@
 
 int	main(void){
 	try {
-		Bureaucrat	b("name", 150);
+		Bureaucrat	b("john1", 150);
+		std::cout << b << std::endl;
 	} catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
-
+	std::cout << "=========================================" << std::endl;
 	try {
-		Bureaucrat	b("name", 150);
+		Bureaucrat	b("john2", 1);
+		std::cout << b << std::endl;
 		b.gradeUp();
+		// std::cout << b << std::endl;
 	} catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
-
+	std::cout << "=========================================" << std::endl;
 	try {
-		Bureaucrat	b("name", 1);
+		Bureaucrat	b("john3", 1);
+		std::cout << b << std::endl;
 	} catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
-
+	std::cout << "=========================================" << std::endl;
 	try {
-		Bureaucrat	b("name", 1);
+		Bureaucrat	b("john4", 150);
+		std::cout << b << std::endl;
 		b.gradeDown();
+		// std::cout << b << std::endl;
 	} catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}

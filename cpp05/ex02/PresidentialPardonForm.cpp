@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 00:04:49 by taung             #+#    #+#             */
-/*   Updated: 2025/08/19 18:34:19 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/26 15:46:06 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 PresidentialPardonForm::PresidentialPardonForm(void) : AForm() {}
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target)
-: AForm("PresidentialPardonForm", false, 25, 5, target) {}
+: AForm("PresidentialPardonForm", 25, 5, target) {}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other)
 : AForm(other) {}

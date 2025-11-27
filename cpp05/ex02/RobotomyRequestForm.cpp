@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 00:04:55 by taung             #+#    #+#             */
-/*   Updated: 2025/08/26 18:38:22 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/26 15:46:00 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 RobotomyRequestForm::RobotomyRequestForm(void) : AForm() {}
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target)
-	: AForm("RobotomyRequestForm", false, 72, 45, target) {}
+	: AForm("RobotomyRequestForm", 72, 45, target) {}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
 	: AForm(other) {}
