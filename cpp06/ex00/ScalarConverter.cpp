@@ -64,7 +64,7 @@ bool	isValidStr(std::string value) {
 
 void	convertStr(double dval) {
 	if (dval < 32 || dval > 126) {
-		std::cout << "char: Non displayable" << std::endl;
+		std::cout << "char: impossible" << std::endl;
 		return ;
 	}
 	std::cout << "char: " << static_cast<char>(dval) << std::endl;
@@ -121,8 +121,8 @@ void ScalarConverter::convert(std::string value) {
 	if (!isValidStr(value)) {
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
-		std::cout << "float: nanf" << std::endl;
-		std::cout << "double: nan" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
 	}
 	else {
 		double	dval;
