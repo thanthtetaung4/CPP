@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 12:01:42 by taung             #+#    #+#             */
-/*   Updated: 2025/09/04 20:56:41 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/29 15:13:13 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ int main() {
 	Base *b = generate();
 	identify(b);
 	identify(*b);
+	delete b;
 }

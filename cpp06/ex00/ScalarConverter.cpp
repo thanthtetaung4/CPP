@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 12:06:31 by taung             #+#    #+#             */
-/*   Updated: 2025/09/02 15:17:21 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/29 15:30:15 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,11 @@ void ScalarConverter::convert(std::string value) {
 	}
 	else {
 		double	dval;
-		dval = (std::atof((value.c_str())));
+		if (value.length() > 1)
+			dval = (std::atof((value.c_str())));
+		else
+			dval = value[0];
+		std::cout << dval << std::endl;
 		convertStr(dval);
 		convertInt(dval);
 		convertFloat(dval);

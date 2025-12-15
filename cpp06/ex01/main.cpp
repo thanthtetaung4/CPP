@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 23:40:40 by taung             #+#    #+#             */
-/*   Updated: 2025/09/02 14:36:00 by taung            ###   ########.fr       */
+/*   Updated: 2025/11/28 20:49:32 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ int main() {
 	//why is this so dangerous
 	// ptr++;
 	// std::cout << Serializer::deserialize(ptr)->getSecret() << " and " << data->getSecret() << std::endl;
+	delete data;
 }
