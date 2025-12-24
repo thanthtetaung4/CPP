@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:35:11 by taung             #+#    #+#             */
-/*   Updated: 2025/09/23 16:45:14 by taung            ###   ########.fr       */
+/*   Updated: 2025/12/24 22:23:08 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(void) {
 
 		sp1.addNumber(10);
 
-		sp2.addNumber(arr.begin(), arr.end());
+		sp2.addRange(arr.begin(), arr.end());
 		std::cout << sp2 << std::endl;
 		std::cout << sp2.shortestSpan() << std::endl;
 		std::cout << sp2.longestSpan() << std::endl;

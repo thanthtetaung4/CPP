@@ -6,18 +6,16 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:35:08 by taung             #+#    #+#             */
-/*   Updated: 2025/09/23 16:46:17 by taung            ###   ########.fr       */
+/*   Updated: 2025/12/24 22:25:10 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Span.hpp"
 
-Span::Span(void) {
-	_N = 0;
-}
+Span::Span(void) : _N(0) {}
 
-Span::Span(int N) : _N(N) {
-	if (N <= 0)
+Span::Span(unsigned int N) : _N(N) {
+	if (N == 0)
 		throw Span::IvalidN();
 }
 
@@ -44,11 +42,19 @@ void	Span::addNumber(int i) {
 	}
 }
 
+/*
+** shortestSpan: Finds the smallest difference between any two adjacent numbers
+** in the sorted container. Since the container is always kept sorted after each
+** insertion, the shortest span will always be between two consecutive elements.
+** Iterates through all adjacent pairs and returns the minimum difference.
+** Throws NotEnoughElements if less than 2 numbers are stored.
+*/
 int		Span::shortestSpan(void) {
-	int	ss = 0;
+	if (this->_container.size() < 2)
+		throw Span::NotEnoughElements();
 
-	ss = this->_container[1] - this->_container[0];
-	for (size_t i = 1; i < (size_t)this->_container.size() - 1; i++) {
+	int	ss = this->_container[1] - this->_container[0];
+	for (size_t i = 1; i < this->_container.size() - 1; i++) {
 		if (ss > (this->_container[i + 1] - this->_container[i]))
 			ss = this->_container[i + 1] - this->_container[i];
 	}
@@ -56,14 +62,23 @@ int		Span::shortestSpan(void) {
 	return (ss);
 }
 
+/*
+** longestSpan: Finds the largest difference between any two numbers in the
+** container. Since the container is always kept sorted, the longest span is
+** simply the difference between the last (largest) and first (smallest) elements.
+** Throws NotEnoughElements if less than 2 numbers are stored.
+*/
 int		Span::longestSpan(void) {
-	return (*(this->_container.end() - 1) - *this->_container.begin());
+	if (this->_container.size() < 2)
+		throw Span::NotEnoughElements();
+	return (this->_container.back() - this->_container.front());
 }
 
-std::ostream&	operator<<(std::ostream& os, Span sp) {
-	for (long i = 0; i < (unsigned int)sp.getN(); i++) {
+std::ostream&	operator<<(std::ostream& os, const Span& sp) {
+	for (size_t i = 0; i < sp.getContainer().size(); i++) {
 		os << "index " << i << " : " << sp.getContainer()[i];
-		(i == (unsigned int)sp.getN() - 1) ? os : os << std::endl;
+		if (i != sp.getContainer().size() - 1)
+			os << std::endl;
 	}
 	return (os);
 }
@@ -72,6 +87,6 @@ const std::vector<int>&	Span::getContainer(void) const {
 	return (this->_container);
 }
 
-int		Span::getN(void) const {
+unsigned int	Span::getN(void) const {
 	return (this->_N);
 }
