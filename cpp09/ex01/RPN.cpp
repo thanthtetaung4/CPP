@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:47:59 by taung             #+#    #+#             */
-/*   Updated: 2025/10/01 15:19:56 by taung            ###   ########.fr       */
+/*   Updated: 2025/12/29 21:32:25 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ RPN::RPN(std::string numbers) {
 	this->equation = numbers;
 	// std::cout << *(numbers.end() - 1) << std::endl;
 	if (*(numbers.end() - 1) == ' ' || this->isValidNumber(*(numbers.end() - 1))) {
-		std::cout << "wrong input" << std::endl;
+		throw std::invalid_argument("wrong input");
 		this->eqOk = false;
 	}
 	else {
@@ -30,7 +30,7 @@ RPN::RPN(std::string numbers) {
 					if (i < len - 1) {
 						if (numbers[i + 1] == ' ') {
 							if (!(this->isValidNumber(numbers[i]) || this->isValidOperator(numbers[i]))) {
-								std::cerr << "err: not a valid number or op" << std::endl;
+								throw std::invalid_argument("not a valid number or op");
 								this->eqOk = false;
 								break;
 							} else
@@ -38,13 +38,13 @@ RPN::RPN(std::string numbers) {
 							// std::cout << numbers[i] << std::endl;
 							i++;
 						} else {
-							std::cerr << "err: number must be 0 - 9" << std::endl;
+							throw std::invalid_argument("number must be 0 - 9");
 							this->eqOk = false;
 							break;
 						}
 					} else {
 						if (!(this->isValidNumber(numbers[i]) || this->isValidOperator(numbers[i]))) {
-							std::cerr << "err: not a valid number or op 2" << std::endl;
+							throw std::invalid_argument("not a valid number or op");
 							this->eqOk = false;
 							break;
 						} else {
@@ -54,12 +54,12 @@ RPN::RPN(std::string numbers) {
 					}
 				}
 			} else {
-				std::cerr << "err: wrong input" << std::endl;
+				throw std::invalid_argument("wrong input");
 				this->eqOk = false;
 			}
 
 		} else {
-			std::cerr << "err: wrong equation" << std::endl;
+			throw std::invalid_argument("wrong equation");
 			this->eqOk = false;
 		}
 	}
@@ -153,7 +153,11 @@ int	RPN::exec_op(int b, int a, char op) {
 	else if (op == '*')
 		res = a * b;
 	else if (op == '/')
+	{
+		if (b == 0)
+			throw std::domain_error("division by zero");
 		res = a / b;
+	}
 	if (res > INT_MAX || res < INT_MIN)
 		throw ResultOutOfLimit();
 	return (static_cast<int>(res));
@@ -165,8 +169,10 @@ int	RPN::exec() {
 	for (size_t i = 0; i < this->equation.length(); i += 2) {
 		// std::cout << this->equation[i] << std::endl;
 		if (this->isValidNumber(this->equation[i])) {
-			this->rpn.push(std::atoi(&this->equation[i]));
-			// std::cout << "numb: " << std::atoi(&this->equation[i]) << std::endl;
+			// numbers are single-digit (0-9) per spec
+			int val = this->equation[i] - '0';
+			this->rpn.push(val);
+			// std::cout << "numb: " << val << std::endl;
 		}
 		if (this->isValidOperator(this->equation[i])) {
 			a = this->exec_op(this->pop(), this->pop(), this->equation[i]);
