@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:48:46 by taung             #+#    #+#             */
-/*   Updated: 2025/09/24 21:29:30 by taung            ###   ########.fr       */
+/*   Updated: 2025/12/29 20:28:10 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@
 class BitcoinExchange {
 	private:
 		std::map<std::string, float>	record;
-		bool	checkDate(std::string date);
+		bool	checkDate(const std::string& date);
 		bool	checkValue(float value);
-		void	exchange(std::string date, int btc);
+		void	exchange(const std::string& date, double btc);
 	public:
 		BitcoinExchange(void);
 		BitcoinExchange(const BitcoinExchange& other);
 		~BitcoinExchange();
 		BitcoinExchange&	operator=(const BitcoinExchange& other);
-		void	getExchange(std::string path);
+		void	getExchange(const std::string& path);
 		const std::string	getRecord(void) const;
 };
 std::ostream&	operator<<(std::ostream& os, const BitcoinExchange& btc);
