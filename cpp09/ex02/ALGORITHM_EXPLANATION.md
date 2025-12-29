@@ -6,10 +6,13 @@ The Ford-Johnson algorithm (also known as Merge-Insertion Sort) is a comparison-
 
 ## Algorithm Complexity
 
-- **Comparison Count:** Approximately n log₂(n) - log₂(n) + O(1)
-- **Time Complexity:** O(n log n) average and best case, O(n log² n) worst case
-- **Space Complexity:** O(n) auxiliary space for merging
-- **Stability:** Not inherently stable (though this implementation treats data carefully)
+This document explains the Ford-Johnson (merge-insertion) algorithm as background. IMPORTANT: the implementation in this repository was changed to use a recursive divide-and-conquer merge sort (with an initial pairwise pre-sorting pass kept from the previous implementation). The notes below describe the original Ford–Johnson properties for reference and the actual implemented algorithm characteristics are listed after.
+
+- **Ford–Johnson (theoretical) Comparison Count:** Approximately n log₂(n) - log₂(n) + O(1)
+- **Implemented Algorithm (repository):** Recursive merge sort (divide-and-conquer) with an initial pairwise ordering pass
+- **Implemented Time Complexity:** O(n log n) best/average/worst
+- **Implemented Space Complexity:** O(n) auxiliary merge buffer + O(log n) recursion stack
+- **Stability:** Merge sort is stable if implemented with stable merge; current implementation is effectively stable for primitive ints but the pairwise pre-pass may affect equal-element ordering
 
 ## Core Phases
 
@@ -39,65 +42,35 @@ Insert 4:  [3, 4, 5, 7, 9]
 
 ## Detailed Implementation
 
-### Vector Implementation (mergeInsertVector)
+### Vector Implementation (repository)
 
-The vector implementation uses contiguous memory with random access:
+The repository implementation keeps the original pairwise pre-sorting pass but uses a recursive divide-and-conquer merge sort for the main ordering step. This produces a recursive algorithm (instead of the previous bottom-up iterative merging).
+
+Key points:
+- Phase 1: pairwise compare and swap adjacent elements (keeps small optimization)
+- Phase 2: recursive merge sort (calls merge on divided subarrays)
+
+Code sketch used in the repository:
 
 ```cpp
-void PmergeMe::mergeInsertVector(std::vector<int>& arr) {
-    // Phase 1: Pairwise comparison
-    for (int i = 0; i + 1 < (int)arr.size(); i += 2) {
-        if (arr[i] > arr[i + 1]) {
-            std::swap(arr[i], arr[i + 1]);
-        }
-    }
+// Phase 1: small pairwise pre-sort
+for (int i = 0; i + 1 < (int)arr.size(); i += 2)
+    if (arr[i] > arr[i + 1])
+        std::swap(arr[i], arr[i + 1]);
 
-    // Phase 2: Merge-insertion
-    int n = arr.size();
-    for (int currSize = 2; currSize < n; currSize = currSize * 2) {
-        for (int leftStart = 0; leftStart < n; leftStart += currSize * 2) {
-            int mid = leftStart + currSize - 1;
-            int rightEnd = std::min(leftStart + currSize * 2 - 1, n - 1);
+// Phase 2: recursive divide-and-conquer merge sort
+recursiveMergeSortVector(arr, 0, arr.size() - 1);
 
-            if (mid < rightEnd) {
-                mergeVector(arr, leftStart, mid, rightEnd);
-            }
-        }
-    }
+void recursiveMergeSortVector(std::vector<int>& arr, int left, int right) {
+    if (left >= right) return;
+    int mid = left + (right - left) / 2;
+    recursiveMergeSortVector(arr, left, mid);
+    recursiveMergeSortVector(arr, mid + 1, right);
+    mergeVector(arr, left, mid, right);
 }
 ```
 
-#### How Vector Merging Works
-
-```cpp
-void PmergeMe::mergeVector(std::vector<int>& arr, int left, int mid, int right) {
-    std::vector<int> temp;
-    int i = left;      // Left subarray pointer
-    int j = mid + 1;   // Right subarray pointer
-
-    // Two-pointer merge technique
-    while (i <= mid && j <= right) {
-        if (arr[i] <= arr[j]) {
-            temp.push_back(arr[i++]);
-        } else {
-            temp.push_back(arr[j++]);
-        }
-    }
-
-    // Append remaining elements
-    while (i <= mid) {
-        temp.push_back(arr[i++]);
-    }
-    while (j <= right) {
-        temp.push_back(arr[j++]);
-    }
-
-    // Copy merged result back
-    for (size_t k = 0; k < temp.size(); k++) {
-        arr[left + k] = temp[k];
-    }
-}
-```
+The `mergeVector` helper remains the same: it merges two sorted contiguous subarrays using a temporary vector and copies the result back.
 
 #### Vector Algorithm Trace
 
@@ -121,63 +94,27 @@ Iteration 2 (currSize=4):
 Final Result:        [3, 4, 5, 7, 9]
 ```
 
-### Deque Implementation (mergeInsertDeque)
+### Deque Implementation (repository)
 
-The deque implementation provides similar functionality with deque-optimized operations:
+Same approach as the vector: pairwise pre-sorting followed by recursive merge sort over index ranges. The merge helper uses a temporary deque to gather merged elements and copies back to the input deque.
 
-```cpp
-void PmergeMe::mergeInsertDeque(std::deque<int>& arr) {
-    // Phase 1: Pairwise comparison
-    for (int i = 0; i + 1 < (int)arr.size(); i += 2) {
-        if (arr[i] > arr[i + 1]) {
-            std::swap(arr[i], arr[i + 1]);
-        }
-    }
-
-    // Phase 2: Merge-insertion
-    int n = arr.size();
-    for (int currSize = 2; currSize < n; currSize = currSize * 2) {
-        for (int leftStart = 0; leftStart < n; leftStart += currSize * 2) {
-            int mid = leftStart + currSize - 1;
-            int rightEnd = std::min(leftStart + currSize * 2 - 1, n - 1);
-
-            if (mid < rightEnd) {
-                mergeDeque(arr, leftStart, mid, rightEnd);
-            }
-        }
-    }
-}
-```
-
-#### How Deque Merging Works
+Code sketch used in the repository:
 
 ```cpp
-void PmergeMe::mergeDeque(std::deque<int>& arr, int left, int mid, int right) {
-    std::deque<int> temp;
-    int i = left;
-    int j = mid + 1;
+// Phase 1: pairwise pass
+for (int i = 0; i + 1 < (int)arr.size(); i += 2)
+    if (arr[i] > arr[i + 1])
+        std::swap(arr[i], arr[i + 1]);
 
-    // Two-pointer merge (same as vector)
-    while (i <= mid && j <= right) {
-        if (arr[i] <= arr[j]) {
-            temp.push_back(arr[i++]);
-        } else {
-            temp.push_back(arr[j++]);
-        }
-    }
+// Phase 2: recursive merge sort
+recursiveMergeSortDeque(arr, 0, arr.size() - 1);
 
-    // Copy remaining elements
-    while (i <= mid) {
-        temp.push_back(arr[i++]);
-    }
-    while (j <= right) {
-        temp.push_back(arr[j++]);
-    }
-
-    // Copy merged result back
-    for (size_t k = 0; k < temp.size(); k++) {
-        arr[left + k] = temp[k];
-    }
+void recursiveMergeSortDeque(std::deque<int>& arr, int left, int right) {
+    if (left >= right) return;
+    int mid = left + (right - left) / 2;
+    recursiveMergeSortDeque(arr, left, mid);
+    recursiveMergeSortDeque(arr, mid + 1, right);
+    mergeDeque(arr, left, mid, right);
 }
 ```
 
@@ -362,9 +299,9 @@ Deque:  Overhead becomes more apparent
 For each merge operation:
 - Create temporary deque/vector: O(k) where k ≤ n
 - Maximum single merge: O(n) for full array merge
-- Total space: O(n)
+- Total merge buffer: O(n)
 
-No additional O(log n) recursion stack (iterative approach)
+Additionally, because the repository implementation uses recursion, there is an O(log n) recursion stack cost for divide-and-conquer.
 ```
 
 ### Memory Usage Comparison

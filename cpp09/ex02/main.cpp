@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:31:51 by taung             #+#    #+#             */
-/*   Updated: 2025/12/22 00:53:51 by taung            ###   ########.fr       */
+/*   Updated: 2025/12/30 01:07:20 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ int	main(int ac, char *av[]) {
 	try {
 		PmergeMe PM(av + 1);
 
-		// Time the vector operation
-		double start_v = get_time_us();
-		PM.vOp();
-		double end_v = get_time_us();
-		double duration_v = end_v - start_v;
-
 		// Time the deque operation
 		double start_dq = get_time_us();
 		PM.dqOp();
 		double end_dq = get_time_us();
 		double duration_dq = end_dq - start_dq;
+
+		// Time the vector operation
+		double start_v = get_time_us();
+		PM.vOp();
+		double end_v = get_time_us();
+		double duration_v = end_v - start_v;
 
 		// Display results after sorting
 		PM.displayResults();

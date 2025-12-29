@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:31:47 by taung             #+#    #+#             */
-/*   Updated: 2025/12/22 00:53:51 by taung            ###   ########.fr       */
+/*   Updated: 2025/12/30 01:02:39 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,26 +91,93 @@ void	PmergeMe::mergeVector(std::vector<int>& arr, int left, int mid, int right) 
 }
 
 void	PmergeMe::mergeInsertVector(std::vector<int>& arr) {
-	// Ford-Johnson (Merge-Insert) Sort
-	// First pass: merge pairs
-	for (int i = 0; i + 1 < (int)arr.size(); i += 2) {
-		if (arr[i] > arr[i + 1]) {
-			std::swap(arr[i], arr[i + 1]);
+	// Implement full Ford-Johnson (merge-insertion) for vector using Jacobsthal order.
+	performFordJohnsonVector(arr);
+}
+
+void PmergeMe::recursiveMergeSortVector(std::vector<int>& arr, int left, int right) {
+	if (left >= right)
+		return;
+
+	int mid = left + (right - left) / 2;
+	recursiveMergeSortVector(arr, left, mid);
+	recursiveMergeSortVector(arr, mid + 1, right);
+	mergeVector(arr, left, mid, right);
+}
+
+void PmergeMe::performFordJohnsonVector(std::vector<int>& arr) {
+	size_t n = arr.size();
+	if (n <= 1)
+		return;
+
+	// Phase 1: pairwise partition into mainChain (smaller) and pendants (larger)
+	std::vector<int> mainChain;
+	std::vector<int> pendants;
+	for (size_t i = 0; i + 1 < n; i += 2) {
+		if (arr[i] <= arr[i + 1]) {
+			mainChain.push_back(arr[i]);
+			pendants.push_back(arr[i + 1]);
+		} else {
+			mainChain.push_back(arr[i + 1]);
+			pendants.push_back(arr[i]);
 		}
 	}
-
-	// Main merge-insert process
-	int n = arr.size();
-	for (int currSize = 2; currSize < n; currSize = currSize * 2) {
-		for (int leftStart = 0; leftStart < n; leftStart += currSize * 2) {
-			int mid = leftStart + currSize - 1;
-			int rightEnd = std::min(leftStart + currSize * 2 - 1, n - 1);
-
-			if (mid < rightEnd) {
-				mergeVector(arr, leftStart, mid, rightEnd);
-			}
-		}
+	// If odd element remains, treat it as a pendant
+	if (n % 2 == 1) {
+		pendants.push_back(arr[n - 1]);
 	}
+
+	// Recursively sort the main chain (use existing recursive merge sort)
+	if (!mainChain.empty())
+		recursiveMergeSortVector(mainChain, 0, static_cast<int>(mainChain.size()) - 1);
+
+	// Generate Jacobsthal insertion order for pendants
+	std::vector<int> order = jacobsthalOrder(static_cast<int>(pendants.size()));
+
+	// Insert pendants into mainChain in Jacobsthal order using binary insertion
+	for (size_t idx = 0; idx < order.size(); ++idx) {
+		int pidx = order[idx];
+		if (pidx < 0 || static_cast<size_t>(pidx) >= pendants.size())
+			continue;
+		binaryInsertVector(mainChain, pendants[pidx]);
+	}
+
+	// Replace arr with the fully merged mainChain
+	arr = mainChain;
+}
+
+std::vector<int> PmergeMe::jacobsthalOrder(int m) {
+	std::vector<int> order;
+	if (m <= 0)
+		return order;
+
+	std::vector<bool> used(m, false);
+	// Generate Jacobsthal numbers iteratively: J0=0, J1=1, Jn = Jn-1 + 2*Jn-2
+	int a = 0; // J0
+	int b = 1; // J1
+	while (b <= m) {
+		int idx = b - 1; // convert 1-based Jacobsthal to 0-based index
+		if (idx >= 0 && idx < m && !used[idx]) {
+			order.push_back(idx);
+			used[idx] = true;
+		}
+		int c = b + 2 * a;
+		a = b;
+		b = c;
+	}
+
+	// Append any remaining pendants in order
+	for (int i = 0; i < m; ++i) {
+		if (!used[i])
+			order.push_back(i);
+	}
+
+	return order;
+}
+
+void PmergeMe::binaryInsertVector(std::vector<int>& mainChain, int value) {
+	std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), value);
+	mainChain.insert(it, value);
 }
 
 void	PmergeMe::sortVector() {
@@ -146,26 +213,36 @@ void	PmergeMe::mergeDeque(std::deque<int>& arr, int left, int mid, int right) {
 }
 
 void	PmergeMe::mergeInsertDeque(std::deque<int>& arr) {
-	// Ford-Johnson (Merge-Insert) Sort
-	// First pass: merge pairs
-	for (int i = 0; i + 1 < (int)arr.size(); i += 2) {
-		if (arr[i] > arr[i + 1]) {
-			std::swap(arr[i], arr[i + 1]);
-		}
-	}
+	// Implement Ford-Johnson for deque by converting to vector, reusing vector variant,
+	// then copy back to deque. This avoids duplicating complex insertion logic.
+	std::vector<int> tmp(arr.begin(), arr.end());
+	performFordJohnsonVector(tmp);
+	// Assign sorted data back to deque
+	arr.clear();
+	for (size_t i = 0; i < tmp.size(); ++i)
+		arr.push_back(tmp[i]);
+}
 
-	// Main merge-insert process
-	int n = arr.size();
-	for (int currSize = 2; currSize < n; currSize = currSize * 2) {
-		for (int leftStart = 0; leftStart < n; leftStart += currSize * 2) {
-			int mid = leftStart + currSize - 1;
-			int rightEnd = std::min(leftStart + currSize * 2 - 1, n - 1);
+void PmergeMe::recursiveMergeSortDeque(std::deque<int>& arr, int left, int right) {
+	if (left >= right)
+		return;
 
-			if (mid < rightEnd) {
-				mergeDeque(arr, leftStart, mid, rightEnd);
-			}
-		}
-	}
+	int mid = left + (right - left) / 2;
+	recursiveMergeSortDeque(arr, left, mid);
+	recursiveMergeSortDeque(arr, mid + 1, right);
+	mergeDeque(arr, left, mid, right);
+}
+
+void PmergeMe::performFordJohnsonDeque(std::deque<int>& arr) {
+	// Not used: we convert deque -> vector, use vector implementation, then convert back.
+	std::vector<int> tmp(arr.begin(), arr.end());
+	performFordJohnsonVector(tmp);
+	arr.assign(tmp.begin(), tmp.end());
+}
+
+void PmergeMe::binaryInsertDeque(std::deque<int>& mainChain, int value) {
+	std::deque<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), value);
+	mainChain.insert(it, value);
 }
 
 void	PmergeMe::sortDeque() {

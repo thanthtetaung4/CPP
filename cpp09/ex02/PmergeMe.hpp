@@ -6,7 +6,7 @@
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:31:40 by taung             #+#    #+#             */
-/*   Updated: 2025/12/22 00:53:51 by taung            ###   ########.fr       */
+/*   Updated: 2025/12/30 01:02:39 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,18 @@ class PmergeMe {
 		// Ford-Johnson sort for vector
 		void	sortVector();
 		void	mergeInsertVector(std::vector<int>& arr);
+		void	performFordJohnsonVector(std::vector<int>& arr);
+		std::vector<int>	jacobsthalOrder(int m);
+		void	binaryInsertVector(std::vector<int>& mainChain, int value);
+		void	recursiveMergeSortVector(std::vector<int>& arr, int left, int right);
 		void	mergeVector(std::vector<int>& arr, int left, int mid, int right);
 
 		// Ford-Johnson sort for deque
 		void	sortDeque();
 		void	mergeInsertDeque(std::deque<int>& arr);
+		void	performFordJohnsonDeque(std::deque<int>& arr);
+		void	binaryInsertDeque(std::deque<int>& mainChain, int value);
+		void	recursiveMergeSortDeque(std::deque<int>& arr, int left, int right);
 		void	mergeDeque(std::deque<int>& arr, int left, int mid, int right);
 
 	public:
