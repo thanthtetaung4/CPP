@@ -5,277 +5,313 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 15:31:47 by taung             #+#    #+#             */
-/*   Updated: 2025/12/30 01:02:39 by taung            ###   ########.fr       */
+/*   Created: 2025/12/31 01:00:13 by taung             #+#    #+#             */
+/*   Updated: 2025/12/31 01:00:15 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "PmergeMe.hpp"
+#include "PmergeMe.hpp"
+#include <algorithm>
+#include <cstddef>
+#include <ctime>
+#include <deque>
+#include <iomanip>
+#include <iostream>
+#include <climits>
+#include <stdexcept>
+#include <sstream>
+#include <string>
+#include <vector>
 
-PmergeMe::PmergeMe(void) {}
+Merge::Merge() {}
 
-PmergeMe::PmergeMe(char *numbers[]) {
-	parseNumbers(numbers);
-}
-
-PmergeMe::PmergeMe(const PmergeMe& other) {
+Merge::Merge(const Merge& other) {
 	*this = other;
 }
 
-PmergeMe::~PmergeMe() {}
-
-PmergeMe&	PmergeMe::operator=(const PmergeMe& other) {
+Merge& Merge::operator=(const Merge& other) {
 	if (this != &other) {
-		this->dq = other.dq;
-		this->v = other.v;
-		this->unsorted = other.unsorted;
+		_vectorData = other._vectorData;
+		_dequeData  = other._dequeData;
 	}
-	return (*this);
+	return *this;
 }
 
-const char* PmergeMe::NotANumber::what() const throw() {
-	return ("Error");
-}
+Merge::~Merge() {}
 
-const char* PmergeMe::InvalidInput::what() const throw() {
-	return ("Error");
-}
+void Merge::checkInput(int ac, char **av) {
+	for (int i = 1; i < ac; i++) {
+		std::string arg = av[i];
+		std::stringstream ss(arg);
+		std::string token;
 
-void	PmergeMe::parseNumbers(char* av[]) {
-	for (size_t i = 0; av[i]; i++) {
-		std::string str(av[i]);
+		while (ss >> token) {
+			if (token.empty() || token[0] == '-' || token[0] == '+')
+				throw std::invalid_argument("Invalid argument");
 
-		// Check for negative numbers or non-numeric characters
-		if (str.empty() || (str[0] == '-') || !std::isdigit(str[0])) {
-			throw PmergeMe::InvalidInput();
+			for (size_t j = 0; j < token.size(); j++) {
+				if (!std::isdigit(token[j]))
+					throw std::invalid_argument("Invalid argument");
+			}
+
+			std::stringstream n(token);
+			long num; n >> num;
+			if (num < 0 || num > INT_MAX)
+				throw std::out_of_range("Out of Int limit");
+
+			_vectorData.push_back(static_cast<int>(num));
+			_dequeData.push_back(static_cast<int>(num));
 		}
+	}
+}
 
-		// Check if all characters are digits
-		for (size_t j = 0; j < str.length(); j++) {
-			if (!std::isdigit(str[j])) {
-				throw PmergeMe::InvalidInput();
+template <typename T>
+void Merge::Display(const std::string& str, const T& data) {
+	std::cout << str;
+
+	int max_length = *std::max_element(data.begin(), data.end());
+	std::stringstream ss;
+	ss << max_length;
+	int width = ss.str().length();
+
+	if (data.size() <= 5) {
+		for (size_t i = 0; i < data.size(); i++) {
+			std::cout << std::setw(width) << data[i];
+			if (i < data.size() - 1)
+				std::cout << " ";
+		}
+	} else {
+		for (size_t i = 0; i < 4; i++) {
+			std::cout << std::setw(width) << data[i];
+			if (i < 3)
+				std::cout << " ";
+		}
+		std::cout << " [...]";
+	}
+	std::cout << std::endl;
+}
+
+template <typename T>
+T generateJacobsthal(int n) {
+	T a;
+	if (n == 1) {
+		a.push_back(0);
+		a.push_back(1);
+		return a;
+	}
+	a.push_back(0);
+	a.push_back(1);
+
+	while (a.back() < n) {
+		a.push_back(a[a.size() - 1] + 2 * a[a.size() - 2]);
+	}
+	return a;
+}
+
+template <typename T, typename PairContainer>
+T sort_small(
+	const T& small,
+	const T& big,
+	const PairContainer& pairs
+) {
+	T orderedSmall;
+	orderedSmall.clear();
+
+	std::vector<bool> used(pairs.size(), false);
+
+	for (size_t i = 0; i < big.size(); i++) {
+		int B = big[i];
+
+		for (size_t j = 0; j < pairs.size(); j++) {
+			if (!used[j] && pairs[j].second == B) {
+			if(B == 20){
+			std::cout << "index is " << i << std::endl;
+			std::cout << "BIG is " << B << std::endl;
+			std::cout << "small is " << pairs[j].first << std::endl;
+		}
+				orderedSmall.push_back(pairs[j].first);
+				used[j] = true;
+				break;
 			}
 		}
-
-		int num = std::atoi(av[i]);
-		this->unsorted.push_back(num);
-		this->v.push_back(num);
-		this->dq.push_back(num);
 	}
+
+	if (orderedSmall.size() < small.size())
+		orderedSmall.push_back(small.back());
+
+	return orderedSmall;
 }
 
-void	PmergeMe::mergeVector(std::vector<int>& arr, int left, int mid, int right) {
-	std::vector<int> temp;
-	int i = left;
-	int j = mid + 1;
 
-	while (i <= mid && j <= right) {
-		if (arr[i] <= arr[j]) {
-			temp.push_back(arr[i++]);
-		} else {
-			temp.push_back(arr[j++]);
+std::vector<int> Merge::magic(std::vector<int>& data) {
+	size_t size = data.size();
+	if (size <= 1)
+		return data;
+
+	bool flag = false;
+	int remain = 0;
+
+	if (size % 2 != 0) {
+		flag = true;
+		remain = data[size - 1];
+		size -= 1;
+	}
+
+	std::vector<std::pair<int, int> > result;
+	for (size_t i = 0; i < size; i += 2) {
+		int left = data[i];
+		int right = data[i + 1];
+		result.push_back(std::make_pair(left, right));
+	}
+
+	for (size_t i = 0; i < result.size(); i++) {
+		if (result[i].first > result[i].second) {
+			std::swap(result[i].first, result[i].second);
 		}
 	}
 
-	while (i <= mid) {
-		temp.push_back(arr[i++]);
+	std::vector<int> big;
+	std::vector<int> small;
+
+	for (size_t i = 0; i < result.size(); i++) {
+		big.push_back(result[i].second);
+		small.push_back(result[i].first);
 	}
 
-	while (j <= right) {
-		temp.push_back(arr[j++]);
-	}
+	big = magic(big);
+	if (flag)
+		small.push_back(remain);
 
-	for (size_t k = 0; k < temp.size(); k++) {
-		arr[left + k] = temp[k];
-	}
-}
+	std::vector<int> sorted = big;
+	small = sort_small(small, big, result);
 
-void	PmergeMe::mergeInsertVector(std::vector<int>& arr) {
-	// Implement full Ford-Johnson (merge-insertion) for vector using Jacobsthal order.
-	performFordJohnsonVector(arr);
-}
+	std::vector<int> jacob = generateJacobsthal<std::vector<int> >(small.size());
 
-void PmergeMe::recursiveMergeSortVector(std::vector<int>& arr, int left, int right) {
-	if (left >= right)
-		return;
+	size_t lastindex = 0;
+	size_t jacobindex = 1;
 
-	int mid = left + (right - left) / 2;
-	recursiveMergeSortVector(arr, left, mid);
-	recursiveMergeSortVector(arr, mid + 1, right);
-	mergeVector(arr, left, mid, right);
-}
+	while (jacobindex < jacob.size() && (size_t)jacob[jacobindex] <= small.size()) {
+		size_t endIndex = jacob[jacobindex];
+		size_t firstIndex = jacob[jacobindex - 1];
 
-void PmergeMe::performFordJohnsonVector(std::vector<int>& arr) {
-	size_t n = arr.size();
-	if (n <= 1)
-		return;
-
-	// Phase 1: pairwise partition into mainChain (smaller) and pendants (larger)
-	std::vector<int> mainChain;
-	std::vector<int> pendants;
-	for (size_t i = 0; i + 1 < n; i += 2) {
-		if (arr[i] <= arr[i + 1]) {
-			mainChain.push_back(arr[i]);
-			pendants.push_back(arr[i + 1]);
-		} else {
-			mainChain.push_back(arr[i + 1]);
-			pendants.push_back(arr[i]);
+		for (size_t i = endIndex; i > firstIndex; i--) {
+			int value = small[i - 1];
+			std::vector<int>::iterator it = std::lower_bound(sorted.begin(), sorted.end(), value);
+			sorted.insert(it, value);
 		}
-	}
-	// If odd element remains, treat it as a pendant
-	if (n % 2 == 1) {
-		pendants.push_back(arr[n - 1]);
+		lastindex = endIndex;
+		jacobindex++;
 	}
 
-	// Recursively sort the main chain (use existing recursive merge sort)
-	if (!mainChain.empty())
-		recursiveMergeSortVector(mainChain, 0, static_cast<int>(mainChain.size()) - 1);
-
-	// Generate Jacobsthal insertion order for pendants
-	std::vector<int> order = jacobsthalOrder(static_cast<int>(pendants.size()));
-
-	// Insert pendants into mainChain in Jacobsthal order using binary insertion
-	for (size_t idx = 0; idx < order.size(); ++idx) {
-		int pidx = order[idx];
-		if (pidx < 0 || static_cast<size_t>(pidx) >= pendants.size())
-			continue;
-		binaryInsertVector(mainChain, pendants[pidx]);
+	for (size_t i = lastindex; i < small.size(); i++) {
+		int value = small[i];
+		std::vector<int>::iterator it =
+			std::lower_bound(sorted.begin(), sorted.end(), value);
+		sorted.insert(it, value);
 	}
 
-	// Replace arr with the fully merged mainChain
-	arr = mainChain;
+	_vectorData = sorted;
+	return _vectorData;
 }
 
-std::vector<int> PmergeMe::jacobsthalOrder(int m) {
-	std::vector<int> order;
-	if (m <= 0)
-		return order;
+std::deque<int> Merge::magicD(std::deque<int>& data) {
+	size_t size = data.size();
+	if (size <= 1)
+		return data;
 
-	std::vector<bool> used(m, false);
-	// Generate Jacobsthal numbers iteratively: J0=0, J1=1, Jn = Jn-1 + 2*Jn-2
-	int a = 0; // J0
-	int b = 1; // J1
-	while (b <= m) {
-		int idx = b - 1; // convert 1-based Jacobsthal to 0-based index
-		if (idx >= 0 && idx < m && !used[idx]) {
-			order.push_back(idx);
-			used[idx] = true;
-		}
-		int c = b + 2 * a;
-		a = b;
-		b = c;
+	bool flag = false;
+	int remain = 0;
+
+	if (size % 2 != 0) {
+		flag = true;
+		remain = data[size - 1];
+		size -= 1;
 	}
 
-	// Append any remaining pendants in order
-	for (int i = 0; i < m; ++i) {
-		if (!used[i])
-			order.push_back(i);
+	std::deque<std::pair<int, int> > result;
+	for (size_t i = 0; i < size; i += 2) {
+		int left = data[i];
+		int right = data[i + 1];
+		result.push_back(std::make_pair(left, right));
 	}
 
-	return order;
-}
-
-void PmergeMe::binaryInsertVector(std::vector<int>& mainChain, int value) {
-	std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), value);
-	mainChain.insert(it, value);
-}
-
-void	PmergeMe::sortVector() {
-	std::vector<int> vCopy = this->v;  // Make a copy
-	mergeInsertVector(vCopy);
-	this->v = vCopy;  // Copy back the sorted result
-}
-
-void	PmergeMe::mergeDeque(std::deque<int>& arr, int left, int mid, int right) {
-	std::deque<int> temp;
-	int i = left;
-	int j = mid + 1;
-
-	while (i <= mid && j <= right) {
-		if (arr[i] <= arr[j]) {
-			temp.push_back(arr[i++]);
-		} else {
-			temp.push_back(arr[j++]);
+	for (size_t i = 0; i < result.size(); i++) {
+		if (result[i].first > result[i].second) {
+			std::swap(result[i].first, result[i].second);
 		}
 	}
 
-	while (i <= mid) {
-		temp.push_back(arr[i++]);
+	std::deque<int> big;
+	std::deque<int> small;
+
+	for (size_t i = 0; i < result.size(); i++) {
+		big.push_back(result[i].second);
+		small.push_back(result[i].first);
 	}
 
-	while (j <= right) {
-		temp.push_back(arr[j++]);
+	big = magicD(big);
+	if (flag)
+		small.push_back(remain);
+
+	std::deque<int> sorted = big;
+	small = sort_small(small, big, result);
+
+	std::deque<int> jacob = generateJacobsthal<std::deque<int> >(small.size());
+
+	size_t lastindex = 0;
+	size_t jacobindex = 1;
+
+	while (jacobindex < jacob.size() && (size_t)jacob[jacobindex] <= small.size()) {
+		size_t endIndex = jacob[jacobindex];
+		size_t firstIndex = jacob[jacobindex - 1];
+
+		for (size_t i = endIndex; i > firstIndex; i--) {
+			int value = small[i - 1];
+			std::deque<int>::iterator it =
+				std::lower_bound(sorted.begin(), sorted.end(), value);
+			sorted.insert(it, value);
+		}
+		lastindex = endIndex;
+		jacobindex++;
 	}
 
-	for (size_t k = 0; k < temp.size(); k++) {
-		arr[left + k] = temp[k];
+	for (size_t i = lastindex; i < small.size(); i++) {
+		int value = small[i];
+		std::deque<int>::iterator it =
+			std::lower_bound(sorted.begin(), sorted.end(), value);
+		sorted.insert(it, value);
 	}
+
+	_dequeData = sorted;
+	return _dequeData;
 }
 
-void	PmergeMe::mergeInsertDeque(std::deque<int>& arr) {
-	// Implement Ford-Johnson for deque by converting to vector, reusing vector variant,
-	// then copy back to deque. This avoids duplicating complex insertion logic.
-	std::vector<int> tmp(arr.begin(), arr.end());
-	performFordJohnsonVector(tmp);
-	// Assign sorted data back to deque
-	arr.clear();
-	for (size_t i = 0; i < tmp.size(); ++i)
-		arr.push_back(tmp[i]);
+void Merge::program(int ac, char** av) {
+
+	if (ac < 2)
+		throw std::out_of_range("Not enough Arguments");
+
+	checkInput(ac, av);
+
+	Display("Before: ", _vectorData);
+
+	clock_t start = clock();
+	magic(_vectorData);
+	clock_t end = clock();
+
+	clock_t startD = clock();
+	magicD(_dequeData);
+	clock_t endD = clock();
+
+	Display("After : ", _vectorData);
+
+	double timeTaken  = double(end - start) * 1000000.0 / CLOCKS_PER_SEC;
+	double timeTakenD = double(endD - startD) * 1000000.0 / CLOCKS_PER_SEC;
+
+	std::cout << std::fixed << std::setprecision(5);
+	std::cout << "Time to process a range of " << _vectorData.size()
+	          << " elements with std::vector : " << timeTaken << " us\n";
+	std::cout << "Time to process a range of " << _vectorData.size()
+	          << " elements with std::deque  : " << timeTakenD << " us\n";
+
 }
-
-void PmergeMe::recursiveMergeSortDeque(std::deque<int>& arr, int left, int right) {
-	if (left >= right)
-		return;
-
-	int mid = left + (right - left) / 2;
-	recursiveMergeSortDeque(arr, left, mid);
-	recursiveMergeSortDeque(arr, mid + 1, right);
-	mergeDeque(arr, left, mid, right);
-}
-
-void PmergeMe::performFordJohnsonDeque(std::deque<int>& arr) {
-	// Not used: we convert deque -> vector, use vector implementation, then convert back.
-	std::vector<int> tmp(arr.begin(), arr.end());
-	performFordJohnsonVector(tmp);
-	arr.assign(tmp.begin(), tmp.end());
-}
-
-void PmergeMe::binaryInsertDeque(std::deque<int>& mainChain, int value) {
-	std::deque<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), value);
-	mainChain.insert(it, value);
-}
-
-void	PmergeMe::sortDeque() {
-	std::deque<int> dqCopy = this->dq;  // Make a copy
-	mergeInsertDeque(dqCopy);
-	this->dq = dqCopy;  // Copy back the sorted result
-}
-
-void	PmergeMe::dqOp(void) {
-	sortDeque();
-}
-
-void	PmergeMe::vOp(void) {
-	sortVector();
-}
-
-void	PmergeMe::displayResults(void) {
-	// Display before
-	std::cout << "Before: ";
-	for (size_t i = 0; i < this->unsorted.size(); i++) {
-		std::cout << this->unsorted[i];
-		if (i < this->unsorted.size() - 1)
-			std::cout << " ";
-	}
-	std::cout << std::endl;
-
-	// Display after
-	std::cout << "After: ";
-	for (size_t i = 0; i < this->v.size(); i++) {
-		std::cout << this->v[i];
-		if (i < this->v.size() - 1)
-			std::cout << " ";
-	}
-	std::cout << std::endl;
-}
-

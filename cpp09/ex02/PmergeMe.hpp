@@ -5,67 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taung <taung@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 15:31:40 by taung             #+#    #+#             */
-/*   Updated: 2025/12/30 01:02:39 by taung            ###   ########.fr       */
+/*   Created: 2025/12/31 01:02:31 by taung             #+#    #+#             */
+/*   Updated: 2025/12/31 01:02:33 by taung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PM_HPP
-# define PM_HPP
+# ifndef PMERGEME_HPP
+# define PMERGEME_HPP
 
-# include <iostream>
 # include <vector>
 # include <deque>
-# include <cstdlib>
-# include <exception>
-# include <ctime>
-# include <sys/time.h>
-# include <algorithm>
 # include <string>
 
-class PmergeMe {
+class Merge {
 	private:
-		std::deque<int>	dq;
-		std::vector<int>	v;
-		std::vector<int>	unsorted;
-
-		// Ford-Johnson sort for vector
-		void	sortVector();
-		void	mergeInsertVector(std::vector<int>& arr);
-		void	performFordJohnsonVector(std::vector<int>& arr);
-		std::vector<int>	jacobsthalOrder(int m);
-		void	binaryInsertVector(std::vector<int>& mainChain, int value);
-		void	recursiveMergeSortVector(std::vector<int>& arr, int left, int right);
-		void	mergeVector(std::vector<int>& arr, int left, int mid, int right);
-
-		// Ford-Johnson sort for deque
-		void	sortDeque();
-		void	mergeInsertDeque(std::deque<int>& arr);
-		void	performFordJohnsonDeque(std::deque<int>& arr);
-		void	binaryInsertDeque(std::deque<int>& mainChain, int value);
-		void	recursiveMergeSortDeque(std::deque<int>& arr, int left, int right);
-		void	mergeDeque(std::deque<int>& arr, int left, int mid, int right);
-
+		std::vector<int> _vectorData;
+		std::deque<int> _dequeData;
 	public:
-		PmergeMe(void);
-		PmergeMe(const PmergeMe& other);
-		PmergeMe(char *numbers[]);
-		PmergeMe&	operator=(const PmergeMe& other);
-		~PmergeMe();
-		void	dqOp(void);
-		void	vOp(void);
-		void	parseNumbers(char* av[]);
-		void	displayResults(void);
+		Merge();
+		Merge(const Merge& other);
+		Merge& operator= (const Merge& other);
+		~Merge();
 
-		class NotANumber : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
-
-		class InvalidInput : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
+		void program(int ac, char** av);
+		void checkInput(int ac, char** av);
+		template<typename T>
+		void Display(const std::string& str, const T& data);
+		std::vector<int> magic(std::vector<int>& data);
+		std::deque<int> magicD(std::deque<int> & data);
 };
 
 # endif
